@@ -1,5 +1,0 @@
-started
-Duration : 3.325
-Length : 5.9999999999999805
-Rotation : 0.05999999999994203
-Precision : 0.10794001054310481
