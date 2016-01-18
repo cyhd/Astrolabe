@@ -53,7 +53,7 @@ public class DemoNavigation extends JFrame {
 		BranchGroup objRoot = new BranchGroup();
 
 		Detector detector = new StartTimeCountDetector(supervisor);
-		TargetShape virtualBegin = new TargetShape(
+		TargetShape virtualBegin = new TargetShape( 0,
 				listePositions[0], listePositions[1], new Color3f(0.0f, 0.0f,
 						1.0f), new Color3f(1.0f, 0.0f, 0.0f), detector);
 		detector.add(virtualBegin);
@@ -61,7 +61,7 @@ public class DemoNavigation extends JFrame {
 		
 		for (int i = 1; i < listePositions.length - 1; i++) {
 			detector = new IntermediateTimeCountDetector(supervisor);
-			TargetShape virtualObject = new TargetShape(
+			TargetShape virtualObject = new TargetShape( i,
 					listePositions[i - 1], listePositions[i],
 					listePositions[i + 1], new Color3f(0.0f, 0.0f, 1.0f),
 					new Color3f(1.0f, 0.0f, 0.0f),
@@ -71,7 +71,7 @@ public class DemoNavigation extends JFrame {
 		}
 		
 		detector = new StopTimeCountDetector(supervisor);
-		TargetShape virtualEnd = new TargetShape(
+		TargetShape virtualEnd = new TargetShape( listePositions.length - 1,
 				listePositions[listePositions.length - 1],
 				listePositions[listePositions.length - 2], new Color3f(0.0f,
 						0.0f, 1.0f), new Color3f(1.0f, 0.0f, 0.0f),
@@ -143,6 +143,7 @@ public class DemoNavigation extends JFrame {
 
 	public DemoNavigation() {
 		setSize(800, 600);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		GraphicsConfiguration config = SimpleUniverse
 				.getPreferredConfiguration();
 		canvas3D = new Canvas3D(config);

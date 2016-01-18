@@ -14,18 +14,30 @@ public abstract class Detector {
 		supervisor = s;
 		fired = false;
 	}
-
+	
 	public void rearm() {
 		fired = false;
 	}
 
-	public abstract void begin(double distance);
+	public abstract void doit(double distance);
+	
+	public void begin(double distance) {
+	      if  ((supervisor.isCurrentStep(getId()))&&(! fired)) {
+	          fired = true ;
+	          doit(distance);
+	       }
+	      else System.out.println( "Go to step " + supervisor.getCurrentStep() + " before step " + getId() + "!"  );
+	    }
+
 
 	public abstract void end();
 
 	public void add(TargetShape s) {
 		target = s;
-
+	}
+	
+	public int getId() {
+		return target.getId();
 	}
 
 }
