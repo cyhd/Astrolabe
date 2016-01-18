@@ -1,5 +1,5 @@
 package etma.navigator.control.network;
-import java.util.HashMap ;
+import java.util.HashMap;
 
 import etma.navigator.control.Navigator;
 

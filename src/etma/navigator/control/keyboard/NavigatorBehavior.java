@@ -1,17 +1,17 @@
 package etma.navigator.control.keyboard;
-import java.awt.AWTEvent ;
-import java.awt.event.KeyEvent ;
-import java.awt.event.MouseEvent ;
-import java.awt.event.MouseWheelEvent ;
-import java.util.Enumeration ;
+import java.awt.AWTEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.util.Enumeration;
 
-import javax.media.j3d.Behavior ;
-import javax.media.j3d.WakeupCriterion ;
-import javax.media.j3d.WakeupOnAWTEvent ;
-import javax.media.j3d.WakeupOr ;
-import javax.vecmath.AxisAngle4d ;
-import javax.vecmath.Quat4d ;
-import javax.vecmath.Vector3d ;
+import javax.media.j3d.Behavior;
+import javax.media.j3d.WakeupCriterion;
+import javax.media.j3d.WakeupOnAWTEvent;
+import javax.media.j3d.WakeupOr;
+import javax.vecmath.AxisAngle4d;
+import javax.vecmath.Quat4d;
+import javax.vecmath.Vector3d;
 
 import etma.navigator.control.Navigator;
 
@@ -39,7 +39,7 @@ public class NavigatorBehavior  extends Behavior {
       this.navigator = navigator ;
       WakeupOnAWTEvent keyPressed = new WakeupOnAWTEvent (KeyEvent.KEY_PRESSED) ;
       WakeupOnAWTEvent keyReleased = new WakeupOnAWTEvent (KeyEvent.KEY_RELEASED) ;
-      WakeupOnAWTEvent mouseWheeled = new WakeupOnAWTEvent (MouseWheelEvent.MOUSE_WHEEL) ;
+      WakeupOnAWTEvent mouseWheeled = new WakeupOnAWTEvent (MouseEvent.MOUSE_WHEEL) ;
       WakeupOnAWTEvent mouseDragged = new WakeupOnAWTEvent (MouseEvent.MOUSE_DRAGGED) ;
       WakeupOnAWTEvent mousePressed = new WakeupOnAWTEvent (MouseEvent.MOUSE_PRESSED) ;
       WakeupOnAWTEvent mouseReleased = new WakeupOnAWTEvent (MouseEvent.MOUSE_RELEASED) ;
@@ -50,11 +50,13 @@ public class NavigatorBehavior  extends Behavior {
       mt.start () ;
    }
 
-   public void initialize () {
+   @Override
+public void initialize () {
       wakeupOn (wEvents) ;
    }
 
-   @SuppressWarnings ("rawtypes")
+   @Override
+@SuppressWarnings ("rawtypes")
    public void processStimulus (Enumeration criteria) { // examiner criteria �
       while (criteria.hasMoreElements ()) {
          WakeupOnAWTEvent w = (WakeupOnAWTEvent)criteria.nextElement () ;
@@ -92,7 +94,7 @@ public class NavigatorBehavior  extends Behavior {
                      } else if (k == KeyEvent.VK_RIGHT) {
                         deltaR.set (new AxisAngle4d (new Vector3d (0, 1, 0), 0.0)) ;
                      }
-                  } else if (events [i].getID () == MouseWheelEvent.MOUSE_WHEEL) {
+                  } else if (events [i].getID () == MouseEvent.MOUSE_WHEEL) {
                      MouseWheelEvent mwe  =  ((MouseWheelEvent)events [i]) ;
                      //deltaT.y = deltaT.y + mwe.getPreciseWheelRotation () / 10 ;
 //                  } else if ((events [i].getID () == MouseEvent.MOUSE_DRAGGED) ||
@@ -145,7 +147,8 @@ public class NavigatorBehavior  extends Behavior {
          finished = true ;
       }
 
-      public void run () {
+      @Override
+	public void run () {
          while (! finished) {
             synchronized (deltaT) {
                synchronized (deltaR) {

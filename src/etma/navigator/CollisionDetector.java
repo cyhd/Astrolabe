@@ -1,12 +1,18 @@
 package etma.navigator;
-import javax.media.j3d.* ;
-import javax.vecmath.* ;
+import java.util.Enumeration;
+
+import javax.media.j3d.Appearance;
+import javax.media.j3d.Behavior;
+import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.Shape3D;
+import javax.media.j3d.Transform3D;
+import javax.media.j3d.TransformGroup;
+import javax.media.j3d.WakeupOnCollisionEntry;
+import javax.media.j3d.WakeupOnCollisionExit;
+import javax.vecmath.Color3f;
+import javax.vecmath.Vector3d;
 
 import etma.navigator.timeRecorder.Detector;
-
-import java.awt.AWTEvent ;
-import java.awt.event.KeyEvent ;
-import java.util.Enumeration ;
 
 public class CollisionDetector extends Behavior {
 
@@ -42,12 +48,14 @@ public class CollisionDetector extends Behavior {
 		targetTG = (TransformGroup)shape.getParent () ;
 	}
 
+	@Override
 	public void initialize () {
 		wEnter = new WakeupOnCollisionEntry (shape, WakeupOnCollisionEntry.USE_GEOMETRY) ;
 		wExit = new WakeupOnCollisionExit (shape, WakeupOnCollisionEntry.USE_GEOMETRY) ;
 		wakeupOn (wEnter) ;
 	}
 
+	@Override
 	@SuppressWarnings ("rawtypes")
    public void processStimulus (Enumeration criteria) {
 		inCollision = !inCollision ;

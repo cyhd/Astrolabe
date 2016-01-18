@@ -1,37 +1,23 @@
 package etma.navigator;
 
 import java.awt.GraphicsConfiguration;
-import java.io.FileNotFoundException;
 
-import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
-import javax.media.j3d.ColoringAttributes;
-import javax.media.j3d.Geometry;
 import javax.media.j3d.PhysicalBody;
 import javax.media.j3d.PhysicalEnvironment;
 import javax.media.j3d.PointLight;
-import javax.media.j3d.PolygonAttributes;
-import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
-import javax.media.j3d.TransparencyAttributes;
 import javax.media.j3d.View;
 import javax.media.j3d.ViewPlatform;
 import javax.media.j3d.VirtualUniverse;
 import javax.swing.JFrame;
-import javax.vecmath.AxisAngle4d;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3f;
-import javax.vecmath.Quat4d;
 import javax.vecmath.Vector3d;
 
-import org.jdesktop.j3d.loaders.vrml97.VrmlLoader;
-
-import com.sun.j3d.loaders.Scene;
-import com.sun.j3d.utils.geometry.Box;
-import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.picking.PickTool;
 import com.sun.j3d.utils.picking.behaviors.PickRotateBehavior;
 import com.sun.j3d.utils.picking.behaviors.PickTranslateBehavior;
@@ -43,9 +29,7 @@ import etma.navigator.control.Navigator;
 import etma.navigator.control.keyboard.NavigatorBehavior;
 import etma.navigator.control.network.PilotageServerSocket;
 import etma.navigator.control.wiimote.PilotageWiimoteBluetooth;
-import etma.navigator.shape.Cube;
 import etma.navigator.shape.ShapeFactory;
-import etma.navigator.timeRecorder.Detector;
 import etma.navigator.timeRecorder.IntermediateTimeCountDetector;
 import etma.navigator.timeRecorder.StartTimeCountDetector;
 import etma.navigator.timeRecorder.StopTimeCountDetector;
@@ -92,8 +76,8 @@ public class DemoNavigation extends JFrame {
 			objRoot.addChild(virtualObject);
 		}
 
-		objRoot.addChild(ShapeFactory.loadFile("data/niveau1.wrl",
-				new Vector3d(-2, 0, 0)));
+		//objRoot.addChild(ShapeFactory.loadFile("data/niveau1.wrl",
+		//		new Vector3d(-2, 0, 0)));
 		// objRoot.addChild (loadFile ("data/niveau2.wrl", new Vector3d (-2, 0,
 		// 0))) ;
 		// objRoot.addChild (loadFile ("data/niveau0_plane.wrl", new Vector3d

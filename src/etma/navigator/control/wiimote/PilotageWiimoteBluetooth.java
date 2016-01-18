@@ -1,34 +1,35 @@
 package etma.navigator.control.wiimote;
-import java.awt.GridLayout ;
-import java.awt.event.ActionEvent ;
-import java.awt.event.ActionListener ;
-import java.util.LinkedList ;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
-import javax.swing.JButton ;
-import javax.swing.JFrame ;
-import javax.swing.JLabel ;
-import javax.swing.JPanel ;
-import javax.swing.JSlider ;
-import javax.swing.JTextField ;
-import javax.swing.event.ChangeEvent ;
-import javax.swing.event.ChangeListener ;
-import javax.vecmath.AxisAngle4d ;
-import javax.vecmath.Quat4d ;
-import javax.vecmath.Vector3d ;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.vecmath.AxisAngle4d;
+import javax.vecmath.Quat4d;
+import javax.vecmath.Vector3d;
 
-import wiiremotej.WiiRemote ;
-import wiiremotej.WiiRemoteExtension ;
-import wiiremotej.WiiRemoteJ ;
-import wiiremotej.event.WRAccelerationEvent ;
-import wiiremotej.event.WRButtonEvent ;
-import wiiremotej.event.WRCombinedEvent ;
-import wiiremotej.event.WRExtensionEvent ;
-import wiiremotej.event.WRIREvent ;
-import wiiremotej.event.WRNunchukExtensionEvent ;
-import wiiremotej.event.WRStatusEvent ;
-import wiiremotej.event.WiiRemoteListener ;
+import wiiremotej.WiiRemote;
+import wiiremotej.WiiRemoteExtension;
+import wiiremotej.WiiRemoteJ;
+import wiiremotej.event.WRAccelerationEvent;
+import wiiremotej.event.WRButtonEvent;
+import wiiremotej.event.WRCombinedEvent;
+import wiiremotej.event.WRExtensionEvent;
+import wiiremotej.event.WRIREvent;
+import wiiremotej.event.WRNunchukExtensionEvent;
+import wiiremotej.event.WRStatusEvent;
+import wiiremotej.event.WiiRemoteListener;
 
-import com.intel.bluetooth.BlueCoveConfigProperties ;
+import com.intel.bluetooth.BlueCoveConfigProperties;
 
 import etma.navigator.control.Navigator;
 
@@ -80,10 +81,10 @@ public class PilotageWiimoteBluetooth extends JFrame {
       disconnectionListener = new DisconnectionListener () ;
       connectDisconnectButton.addActionListener (connectionListener) ;
       status = new JLabel ("unknown") ;
-      sliderSeuilTranslation = new JSlider (JSlider.HORIZONTAL, 0, 100, (int)(seuilSensibiliteTranslation * 250)) ;
-      sliderSeuilRotation = new JSlider (JSlider.HORIZONTAL, 0, 100, (int)(seuilSensibiliteRotation * 250)) ;
-      sliderGainTranslation = new JSlider (JSlider.HORIZONTAL, 0, 100, (int)(gainTranslation * 100)) ;
-      sliderGainRotation = new JSlider (JSlider.HORIZONTAL, 0, 100, (int)(gainRotation * 1000)) ;
+      sliderSeuilTranslation = new JSlider (SwingConstants.HORIZONTAL, 0, 100, (int)(seuilSensibiliteTranslation * 250)) ;
+      sliderSeuilRotation = new JSlider (SwingConstants.HORIZONTAL, 0, 100, (int)(seuilSensibiliteRotation * 250)) ;
+      sliderGainTranslation = new JSlider (SwingConstants.HORIZONTAL, 0, 100, (int)(gainTranslation * 100)) ;
+      sliderGainRotation = new JSlider (SwingConstants.HORIZONTAL, 0, 100, (int)(gainRotation * 1000)) ;
       sliderSeuilTranslation.addChangeListener (new ChangeListener () {
          @Override
          public void stateChanged (ChangeEvent e) {
@@ -512,7 +513,8 @@ public class PilotageWiimoteBluetooth extends JFrame {
          finished = true ;
       }
 
-      public void run () {
+      @Override
+	public void run () {
          while (! finished) {
             navigator.supportTranslateInHeadFrame (translation.x, translation.y, translation.z) ;
             try {
@@ -539,7 +541,8 @@ public class PilotageWiimoteBluetooth extends JFrame {
          finished = true ;
       }
 
-      public void run () {
+      @Override
+	public void run () {
          while (! finished) {
             navigator.supportRotateInHeadFrame (rotation.x, rotation.y, rotation.z, rotation.w) ;
             try {

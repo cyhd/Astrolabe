@@ -36,7 +36,7 @@ public class ShapeFactory {
     TransformGroup objTrans = new TransformGroup (translation) ;
     objTrans.setCapability (TransformGroup.ALLOW_TRANSFORM_WRITE) ;
     objTrans.setCapability (TransformGroup.ALLOW_TRANSFORM_READ) ;
-    objTrans.setCapability (TransformGroup.ENABLE_PICK_REPORTING) ;
+    objTrans.setCapability (Node.ENABLE_PICK_REPORTING) ;
     Cube box = new Cube () ;
     box.getGeometry ().setCapability (Geometry.ALLOW_INTERSECT) ;
     Appearance app = new Appearance () ;
@@ -79,7 +79,7 @@ public class ShapeFactory {
 	      TransformGroup objTrans = new TransformGroup (translation) ;
 	      objTrans.setCapability (TransformGroup.ALLOW_TRANSFORM_WRITE) ;
 	      objTrans.setCapability (TransformGroup.ALLOW_TRANSFORM_READ) ;
-	      objTrans.setCapability (TransformGroup.ENABLE_PICK_REPORTING) ;
+	      objTrans.setCapability (Node.ENABLE_PICK_REPORTING) ;
 	      Cube box = new Cube () ;
 	      box.getGeometry ().setCapability (Geometry.ALLOW_INTERSECT) ;
 	      Appearance app = new Appearance () ;
@@ -135,7 +135,7 @@ public class ShapeFactory {
 	      TransformGroup objTrans = new TransformGroup (translation) ;
 	      objTrans.setCapability (TransformGroup.ALLOW_TRANSFORM_WRITE) ;
 	      objTrans.setCapability (TransformGroup.ALLOW_TRANSFORM_READ) ;
-	      objTrans.setCapability (TransformGroup.ENABLE_PICK_REPORTING) ;
+	      objTrans.setCapability (Node.ENABLE_PICK_REPORTING) ;
 	      Cube box = new Cube () ;
 	      box.getGeometry ().setCapability (Geometry.ALLOW_INTERSECT) ;
 	      Appearance app = new Appearance () ;

@@ -55,6 +55,7 @@ public class PilotageServerSocket extends Thread {
 			System.out.println ("Connection") ;
 		}
 		
+		@Override
 		public void run () {
 			try {
 				ObjectInputStream ois = new ObjectInputStream (socket.getInputStream()) ;

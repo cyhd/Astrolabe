@@ -1,6 +1,9 @@
 package etma.navigator.shape;
-import javax.media.j3d.* ;
-import javax.vecmath.* ;
+import javax.media.j3d.Appearance;
+import javax.media.j3d.GeometryArray;
+import javax.media.j3d.QuadArray;
+import javax.media.j3d.Shape3D;
+import javax.vecmath.Point3d;
 
 class CubeGeometry extends QuadArray {
 
@@ -39,7 +42,7 @@ class CubeGeometry extends QuadArray {
 	      points [3], points [7], points [6], points [2] } ;
 
 	public CubeGeometry () {
-		super (24, QuadArray.COORDINATES) ;
+		super (24, GeometryArray.COORDINATES) ;
 		setCoordinates (0, faces) ;
 	}
 

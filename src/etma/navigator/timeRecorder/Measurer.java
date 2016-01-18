@@ -1,10 +1,10 @@
 package etma.navigator.timeRecorder;
-import java.io.FileWriter ;
-import java.io.IOException ;
-import java.util.Date ;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
 
-import javax.vecmath.Quat4d ;
-import javax.vecmath.Vector3d ;
+import javax.vecmath.Quat4d;
+import javax.vecmath.Vector3d;
 
 import etma.navigator.control.Navigator;
 
