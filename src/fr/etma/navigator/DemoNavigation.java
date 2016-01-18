@@ -30,6 +30,8 @@ import fr.etma.navigator.control.keyboard.NavigatorBehavior;
 import fr.etma.navigator.control.network.PilotageServerSocket;
 import fr.etma.navigator.control.wiimote.PilotageWiimoteBluetooth;
 import fr.etma.navigator.shape.ShapeFactory;
+import fr.etma.navigator.shape.TargetShape;
+import fr.etma.navigator.timeRecorder.Detector;
 import fr.etma.navigator.timeRecorder.IntermediateTimeCountDetector;
 import fr.etma.navigator.timeRecorder.StartTimeCountDetector;
 import fr.etma.navigator.timeRecorder.StopTimeCountDetector;
@@ -50,29 +52,38 @@ public class DemoNavigation extends JFrame {
 		// Create the root of the branch graph
 		BranchGroup objRoot = new BranchGroup();
 
-		TransformGroup virtualBegin = ShapeFactory.createTarget(
+		Detector detector = new StartTimeCountDetector(supervisor);
+		TargetShape virtualBegin = new TargetShape(
 				listePositions[0], listePositions[1], new Color3f(0.0f, 0.0f,
-						1.0f), new Color3f(1.0f, 0.0f, 0.0f),
-				new StartTimeCountDetector(supervisor));
+						1.0f), new Color3f(1.0f, 0.0f, 0.0f), detector);
+		detector.add(virtualBegin);
 		objRoot.addChild(virtualBegin);
+		
 		for (int i = 1; i < listePositions.length - 1; i++) {
-			TransformGroup virtualObject = ShapeFactory.createTarget(
+			detector = new IntermediateTimeCountDetector(supervisor);
+			TargetShape virtualObject = new TargetShape(
 					listePositions[i - 1], listePositions[i],
 					listePositions[i + 1], new Color3f(0.0f, 0.0f, 1.0f),
 					new Color3f(1.0f, 0.0f, 0.0f),
-					new IntermediateTimeCountDetector(supervisor));
+					detector);
+			detector.add(virtualObject);
 			objRoot.addChild(virtualObject);
 		}
-		TransformGroup virtualEnd = ShapeFactory.createTarget(
+		
+		detector = new StopTimeCountDetector(supervisor);
+		TargetShape virtualEnd = new TargetShape(
 				listePositions[listePositions.length - 1],
 				listePositions[listePositions.length - 2], new Color3f(0.0f,
 						0.0f, 1.0f), new Color3f(1.0f, 0.0f, 0.0f),
-				new StopTimeCountDetector(supervisor));
+				detector);
+		detector.add(virtualEnd);
 		objRoot.addChild(virtualEnd);
+		
 		for (int i = 1; i < listePositions.length; i++) {
 			TransformGroup virtualObject = ShapeFactory.createLine(
 					listePositions[i - 1], listePositions[i], new Color3f(0.0f,
 							1.0f, 0.0f));
+			
 			objRoot.addChild(virtualObject);
 		}
 

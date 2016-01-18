@@ -12,6 +12,7 @@ public class StopTimeCountDetector extends Detector {
          fired = true ;
          System.out.println ("supervisor.stopTimeCount ()") ;
          supervisor.stopTimeCount (this, distance) ;
+         target.select();
       }
    }
 

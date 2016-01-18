@@ -12,6 +12,7 @@ public class IntermediateTimeCountDetector extends Detector {
          fired = true ;
          System.out.println ("supervisor.intermediateTimeCount ()") ;
          supervisor.intermediateTimeCount (this, distance) ;
+         target.select();
       }
    }
 

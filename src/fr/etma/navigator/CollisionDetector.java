@@ -76,13 +76,13 @@ public class CollisionDetector extends Behavior {
 	         deltaPosition.setZ (0.0) ;
 	         System.out.println ("deltaPosition = " + deltaPosition + " ; length = " + deltaPosition.length ()) ;
 	      }
-			shapeAppearance.setColoringAttributes (highlight) ;
+			//shapeAppearance.setColoringAttributes (highlight) ;
 			if (detector != null) {
 			   detector.begin (deltaPosition.length ()) ;
 			}
 			wakeupOn (wExit) ;
 		} else {
-			shapeAppearance.setColoringAttributes (shapeColoring) ;
+		//	shapeAppearance.setColoringAttributes (shapeColoring) ;
          if (detector != null) {
             detector.end () ;
          }

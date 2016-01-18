@@ -12,6 +12,7 @@ public class StartTimeCountDetector extends Detector {
          fired = true ;
          System.out.println ("supervisor.startTimeCount ()") ;
          supervisor.startTimeCount (this, distance) ;
+         target.select();
       }
    }
 
