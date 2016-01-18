@@ -1,0 +1,16 @@
+new Vector3d (0, 0, 0),
+new Vector3d (10, 0, 0),
+new Vector3d (30, 0, 10),
+new Vector3d (60, 0, 30),
+new Vector3d (90, 0, 50),
+new Vector3d (120, 0, 40),
+new Vector3d (150, 0, 20),
+new Vector3d (180, 0, 15),
+new Vector3d (210, 0, 0),
+new Vector3d (240, 0, -10),
+new Vector3d (270, 0, -20),
+new Vector3d (300, 0, -35),
+new Vector3d (330, 0, -40),
+new Vector3d (360, 0, -60),
+new Vector3d (390, 0, -50)
+

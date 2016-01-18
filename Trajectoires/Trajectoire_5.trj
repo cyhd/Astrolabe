@@ -1,0 +1,16 @@
+new Vector3d (0, 0, -24),
+new Vector3d (5,4,-37),
+new Vector3d (14, 10, -52),
+new Vector3d (27, 17, -63),
+new Vector3d (48, 22, -75),
+new Vector3d (70, 34, -84),
+new Vector3d (78, 54, -89),
+new Vector3d (78, 78, -93),
+new Vector3d (78, 86, -100),
+new Vector3d (87, 99, -110),
+new Vector3d (102, 114, -113),
+new Vector3d (117, 123, -107),
+new Vector3d (128, 140, -103),
+new Vector3d (146, 149, -94),
+new Vector3d (155, 154, -80)
+
