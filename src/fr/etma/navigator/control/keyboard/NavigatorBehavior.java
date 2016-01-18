@@ -1,4 +1,4 @@
-package etma.navigator.control.keyboard;
+package fr.etma.navigator.control.keyboard;
 import java.awt.AWTEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -13,7 +13,7 @@ import javax.vecmath.AxisAngle4d;
 import javax.vecmath.Quat4d;
 import javax.vecmath.Vector3d;
 
-import etma.navigator.control.Navigator;
+import fr.etma.navigator.control.Navigator;
 
 /**
  * NavigatorBehavior manages the camera movements (Navigator class) through Keyboard and Mouse

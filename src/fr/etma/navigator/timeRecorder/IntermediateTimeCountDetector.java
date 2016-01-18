@@ -1,4 +1,4 @@
-package etma.navigator.timeRecorder;
+package fr.etma.navigator.timeRecorder;
 
 public class IntermediateTimeCountDetector extends Detector {
 

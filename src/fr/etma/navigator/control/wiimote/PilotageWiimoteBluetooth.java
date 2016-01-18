@@ -1,4 +1,4 @@
-package etma.navigator.control.wiimote;
+package fr.etma.navigator.control.wiimote;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +31,7 @@ import wiiremotej.event.WiiRemoteListener;
 
 import com.intel.bluetooth.BlueCoveConfigProperties;
 
-import etma.navigator.control.Navigator;
+import fr.etma.navigator.control.Navigator;
 
 public class PilotageWiimoteBluetooth extends JFrame {
 

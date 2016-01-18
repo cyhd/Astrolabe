@@ -1,4 +1,4 @@
-package etma.navigator;
+package fr.etma.navigator;
 import java.util.Enumeration;
 
 import javax.media.j3d.Appearance;
@@ -12,7 +12,7 @@ import javax.media.j3d.WakeupOnCollisionExit;
 import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 
-import etma.navigator.timeRecorder.Detector;
+import fr.etma.navigator.timeRecorder.Detector;
 
 public class CollisionDetector extends Behavior {
 

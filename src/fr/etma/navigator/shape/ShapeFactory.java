@@ -1,4 +1,4 @@
-package etma.navigator.shape;
+package fr.etma.navigator.shape;
 
 import java.io.FileNotFoundException;
 
@@ -24,8 +24,8 @@ import com.sun.j3d.loaders.Scene;
 import com.sun.j3d.utils.geometry.Box;
 import com.sun.j3d.utils.geometry.Cylinder;
 
-import etma.navigator.CollisionDetector;
-import etma.navigator.timeRecorder.Detector;
+import fr.etma.navigator.CollisionDetector;
+import fr.etma.navigator.timeRecorder.Detector;
 
 public class ShapeFactory {
 

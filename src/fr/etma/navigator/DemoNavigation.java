@@ -1,4 +1,4 @@
-package etma.navigator;
+package fr.etma.navigator;
 
 import java.awt.GraphicsConfiguration;
 
@@ -25,15 +25,15 @@ import com.sun.j3d.utils.picking.behaviors.PickZoomBehavior;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.universe.ViewingPlatform;
 
-import etma.navigator.control.Navigator;
-import etma.navigator.control.keyboard.NavigatorBehavior;
-import etma.navigator.control.network.PilotageServerSocket;
-import etma.navigator.control.wiimote.PilotageWiimoteBluetooth;
-import etma.navigator.shape.ShapeFactory;
-import etma.navigator.timeRecorder.IntermediateTimeCountDetector;
-import etma.navigator.timeRecorder.StartTimeCountDetector;
-import etma.navigator.timeRecorder.StopTimeCountDetector;
-import etma.navigator.timeRecorder.Supervisor;
+import fr.etma.navigator.control.Navigator;
+import fr.etma.navigator.control.keyboard.NavigatorBehavior;
+import fr.etma.navigator.control.network.PilotageServerSocket;
+import fr.etma.navigator.control.wiimote.PilotageWiimoteBluetooth;
+import fr.etma.navigator.shape.ShapeFactory;
+import fr.etma.navigator.timeRecorder.IntermediateTimeCountDetector;
+import fr.etma.navigator.timeRecorder.StartTimeCountDetector;
+import fr.etma.navigator.timeRecorder.StopTimeCountDetector;
+import fr.etma.navigator.timeRecorder.Supervisor;
 
 public class DemoNavigation extends JFrame {
 

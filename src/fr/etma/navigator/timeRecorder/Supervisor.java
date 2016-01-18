@@ -1,6 +1,6 @@
-package etma.navigator.timeRecorder;
+package fr.etma.navigator.timeRecorder;
 
-import etma.navigator.control.Navigator;
+import fr.etma.navigator.control.Navigator;
 
 public class Supervisor {
 

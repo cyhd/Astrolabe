@@ -1,4 +1,4 @@
-package etma.navigator.shape;
+package fr.etma.navigator.shape;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.GeometryArray;
 import javax.media.j3d.QuadArray;

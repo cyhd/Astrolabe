@@ -1,4 +1,4 @@
-package etma.navigator.control;
+package fr.etma.navigator.control;
 
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;

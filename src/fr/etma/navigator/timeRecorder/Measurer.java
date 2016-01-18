@@ -1,4 +1,4 @@
-package etma.navigator.timeRecorder;
+package fr.etma.navigator.timeRecorder;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.Date;
 import javax.vecmath.Quat4d;
 import javax.vecmath.Vector3d;
 
-import etma.navigator.control.Navigator;
+import fr.etma.navigator.control.Navigator;
 
 public class Measurer extends Thread {
    

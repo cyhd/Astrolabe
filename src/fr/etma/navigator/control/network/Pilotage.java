@@ -1,7 +1,7 @@
-package etma.navigator.control.network;
+package fr.etma.navigator.control.network;
 import java.util.HashMap;
 
-import etma.navigator.control.Navigator;
+import fr.etma.navigator.control.Navigator;
 
 
 public class Pilotage {
