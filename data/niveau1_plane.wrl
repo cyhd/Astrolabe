@@ -1,0 +1,61 @@
+#VRML V2.0 utf8
+
+# This file was authored with Blender (http://www.blender.org/)
+# Blender version 249
+# Blender file batiment_complet3.blend
+# Exported using VRML97 exporter v1.55 (2006/01/17)
+
+
+DEF OB_niveau1_plane Transform {
+	translation 0.031228 7.214127 -0.027902
+	rotation 1.000000 0.000000 0.000000 0.000000
+	scale 1.000000 1.000000 1.000000
+	children [
+		DEF ME_Cube_002 Group {
+			children [
+				Shape {
+					appearance Appearance {
+						material DEF MA_Material_003 Material {
+							diffuseColor 0.8 0.8 0.8
+							ambientIntensity 0.1666667
+							specularColor 0.4012008 0.4012008 0.4012008
+							emissiveColor  0.0 0.0 0.0
+							shininess 0.0976563
+							transparency 0.0
+						}
+					}
+					geometry IndexedFaceSet {
+						solid TRUE
+						coord DEF coord_Cube_002 Coordinate {
+							point [
+29.9965820312 -1.0 -21.0165519714
+ 29.9965820312 -1.0 21.0165519714
+ -29.9965820312 -1.0 21.0165519714
+ -29.9965820312 -1.0 -21.0165519714
+ 29.9965820312 -0.870619535446 -21.0165519714
+ 29.9965820312 -0.870619535446 21.0165519714
+ -29.9965820312 -0.870619535446 21.0165519714
+ -29.9965820312 -0.870619535446 -21.0165519714
+ 							]
+						}
+						
+						coordIndex [
+4 0 3 -1, 
+4 3 7 -1, 
+2 6 7 -1, 
+2 7 3 -1, 
+1 5 6 -1, 
+1 6 2 -1, 
+0 4 5 -1, 
+0 5 1 -1, 
+4 7 6 -1, 
+4 6 5 -1, 
+0 1 2 -1, 
+0 2 3 -1, 
+						]
+					}
+				}
+			]
+		}
+	]
+}
