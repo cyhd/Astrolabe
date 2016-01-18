@@ -7,13 +7,10 @@ public class IntermediateTimeCountDetector extends Detector {
    }
 
    @Override
-   public void begin (double distance) {
-      if (! fired) {
-         fired = true ;
-         System.out.println ("supervisor.intermediateTimeCount ()") ;
-         supervisor.intermediateTimeCount (this, distance) ;
-         target.select();
-      }
+   public void doit (double distance) {
+      System.out.println ("supervisor.intermediateTimeCount ()") ;
+      supervisor.intermediateTimeCount (this, distance) ;
+      target.select();
    }
 
    @Override

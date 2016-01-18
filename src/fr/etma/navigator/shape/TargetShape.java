@@ -26,11 +26,14 @@ public class TargetShape extends TransformGroup {
 	Transform3D translation = new Transform3D();
 	Color3f collisionColor;
 	Appearance shapeAppearance;
+	private int id;
 
-	public TargetShape(Vector3d v3d, Vector3d nextV3d, Color3f color,
+	public TargetShape(int id, Vector3d v3d, Vector3d nextV3d, Color3f color,
 			Color3f collisionColor, Detector detector) {
 		super();
 
+		this.id = id;
+		
 		translation.setRotation(getRotation1(v3d, nextV3d));
 
 		translation.setTranslation(v3d);
@@ -41,9 +44,10 @@ public class TargetShape extends TransformGroup {
 		init(color, collisionColor, detector);
 	}
 
-	public TargetShape(Vector3d previousV3d, Vector3d v3d, Vector3d nextV3d,
+	public TargetShape(int id, Vector3d previousV3d, Vector3d v3d, Vector3d nextV3d,
 			Color3f color, Color3f collisionColor, Detector detector) {
 
+		this.id=id;
 		
 		Quat4d rotation1 = getRotation1(v3d, nextV3d);
 
@@ -135,5 +139,9 @@ public class TargetShape extends TransformGroup {
 		//ColoringAttributes shapeColoring = shapeAppearance.getColoringAttributes () ;
 		shapeAppearance.setColoringAttributes (highlight) ;
 		
+	}
+
+	public int getId() {
+		return id;
 	}
 }
