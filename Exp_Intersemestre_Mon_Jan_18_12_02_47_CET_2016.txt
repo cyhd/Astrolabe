@@ -1,0 +1,6 @@
+started
+step 1
+Duration : 1.716
+Length : 5.799999999999979
+Rotation : 0.0
+Precision : 0.0
