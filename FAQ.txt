@@ -7,7 +7,7 @@ With Linux, you will have to have to add an argument to the Java VM when running
 
 - How do I change the keyboard or mouse configuration ?
 
-You have to modify the NavigatorBehavior class (it inherits from the Java3D class that manages inputs).
+You have to modify the NavigatorBehavior class (it inherits from the Java3D class Behavior that manages inputs).
 
 - How can I update the logging information ?
 
