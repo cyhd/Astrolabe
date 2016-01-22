@@ -6,7 +6,7 @@
 # Package Files #
 *.war
 *.ear
-*.jar
+# *.jar
 
 # text files #
 *.txt
