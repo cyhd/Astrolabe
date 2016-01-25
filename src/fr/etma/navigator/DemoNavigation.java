@@ -31,8 +31,10 @@ import fr.etma.navigator.control.network.PilotageServerSocket;
 import fr.etma.navigator.control.wiimote.PilotageWiimoteBluetooth;
 import fr.etma.navigator.shape.ShapeFactory;
 import fr.etma.navigator.shape.TargetShape;
+import fr.etma.navigator.shape.TubeShape;
 import fr.etma.navigator.timeRecorder.Detector;
 import fr.etma.navigator.timeRecorder.IntermediateTimeCountDetector;
+import fr.etma.navigator.timeRecorder.Measurer;
 import fr.etma.navigator.timeRecorder.StartTimeCountDetector;
 import fr.etma.navigator.timeRecorder.StopTimeCountDetector;
 import fr.etma.navigator.timeRecorder.Supervisor;
@@ -47,6 +49,7 @@ public class DemoNavigation extends JFrame {
 	private Canvas3D canvas3D = null;
 	private TransformGroup viewpointTG = new TransformGroup();
 	private Supervisor supervisor;
+	private TubeShape[] tubeShapes;
 
 	public BranchGroup createSceneGraph(Vector3d[] listePositions) {
 		// Create the root of the branch graph
@@ -79,11 +82,12 @@ public class DemoNavigation extends JFrame {
 		detector.add(virtualEnd);
 		objRoot.addChild(virtualEnd);
 		
+		tubeShapes = new TubeShape[listePositions.length-1];
 		for (int i = 1; i < listePositions.length; i++) {
-			TransformGroup virtualObject = ShapeFactory.createLine(
+			TubeShape virtualObject = new TubeShape(i,
 					listePositions[i - 1], listePositions[i], new Color3f(0.0f,
 							1.0f, 0.0f));
-			
+			tubeShapes [i-1] = virtualObject;
 			objRoot.addChild(virtualObject);
 		}
 
@@ -123,6 +127,7 @@ public class DemoNavigation extends JFrame {
 		return objRoot;
 	}
 
+	
 	public void enableInteraction(BranchGroup objRoot) {
 		BoundingSphere bounds = new BoundingSphere(new Point3d(0, 0, 0), 100);
 		PickRotateBehavior prb = new PickRotateBehavior(objRoot, canvas3D,
@@ -206,10 +211,12 @@ public class DemoNavigation extends JFrame {
 				new Vector3d(10, 0, -20), new Vector3d(20, 0, -20),
 				new Vector3d(30, 10, -10), new Vector3d(40, 10, 0) };
 
-		supervisor = new Supervisor(navigator, listePositions.length - 2);
-
 		// universe.getViewingPlatform ().setNominalViewingTransform () ;
+		Measurer measurer = new Measurer(navigator);
+		supervisor = new Supervisor(measurer, listePositions.length - 2);
 		BranchGroup scene = createSceneGraph(listePositions);
+		measurer.setTubeShapes(tubeShapes);
+		
 		// enableInteraction (scene) ;
 		// compilation de la scène
 		scene.compile();

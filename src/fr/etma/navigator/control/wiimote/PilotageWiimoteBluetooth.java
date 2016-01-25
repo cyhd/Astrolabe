@@ -160,9 +160,23 @@ public class PilotageWiimoteBluetooth extends JFrame {
 
    public void connect (String bluetoothAddress) {
       wiimote = null ;
+      
+      while (wiimote == null) {
+          try {
+      //  	  wiimote = WiiRemoteJ.connectToRemote (bluetoothAddress) ;
+        	  wiimote = WiiRemoteJ.findRemote();
+          }
+          catch(Exception e) {
+        	  wiimote = null;
+              e.printStackTrace();
+              System.out.println("Failed to connect remote. Trying again.");
+              
+          }
+      }
+      
       try {
-         //wiimote = WiiRemoteJ.findRemote();
-         wiimote = WiiRemoteJ.connectToRemote (bluetoothAddress) ;
+        // wiimote = WiiRemoteJ.findRemote();
+        // wiimote = WiiRemoteJ.connectToRemote (bluetoothAddress) ;
          status.setText ("connected");
          wiimote.addWiiRemoteListener (new WiimoteListener ()) ;
          wiimote.setIRSensorEnabled (true, WRIREvent.BASIC) ;

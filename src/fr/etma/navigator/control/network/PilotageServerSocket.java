@@ -20,7 +20,7 @@ public class PilotageServerSocket extends Thread {
 	protected final int yMin = 0 ;
 	
 	public PilotageServerSocket (Navigator navigator) {
-      this (navigator, 1234, "10.29.227.224") ;
+      this (navigator, 1234, "192.168.1.7") ;
       //this (navigator, 1234, "10.29.230.241") ;
 		
 	}

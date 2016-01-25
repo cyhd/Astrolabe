@@ -63,96 +63,9 @@ public class ShapeFactory {
  }
 
 
-	   static public TransformGroup createLine (Vector3d from, Vector3d to, Color3f color) {
-		      Transform3D translation = new Transform3D () ;
-		      Vector3d middle = new Vector3d (from) ;
-		      middle.add (to) ;
-		      middle.set (middle.getX () / 2, middle.getY () / 2, middle.getZ () / 2) ;
-		      Vector3d y = new Vector3d (0, 1, 0) ;
-		      Vector3d length = new Vector3d () ;
-		      length.sub (to, from) ;
-		      Vector3d rotationAxis = new Vector3d () ;
-		      rotationAxis.cross (y, length) ;
-		      Quat4d rotation = new Quat4d () ;
-		      rotation.set (new AxisAngle4d (rotationAxis.getX (), rotationAxis.getY (), rotationAxis.getZ (), y.angle (length))) ;      
-		      translation.setRotation (rotation) ;
-		      translation.setTranslation (middle) ;
-		      //translation.setScale (new Vector3d (1, length.length (), 1)) ;
-		      TransformGroup objTrans = new TransformGroup (translation) ;
-		      objTrans.setCapability (TransformGroup.ALLOW_TRANSFORM_WRITE) ;
-		      objTrans.setCapability (TransformGroup.ALLOW_TRANSFORM_READ) ;
-		      //objTrans.setCapability (TransformGroup.ENABLE_PICK_REPORTING) ;
-		      Cylinder cylinder = new Cylinder (2.0f, (float)length.length ()) ;
-		      //cylinder.getShape (Cylinder.BODY).getGeometry ().setCapability (Geometry.ALLOW_INTERSECT) ;
-		      cylinder.getShape (Cylinder.BOTTOM).removeAllGeometries () ;
-		      cylinder.getShape (Cylinder.TOP).removeAllGeometries () ;
-		      Appearance app = new Appearance () ;
-		      ColoringAttributes ca = new ColoringAttributes () ;
-		      ca.setColor (color) ;
-		      ColoringAttributes ca2 = new ColoringAttributes () ;
-		      ca2.setColor(new Color3f (1.0f, 0.0f, 0.0f));
-		      app.setCapability (Appearance.ALLOW_COLORING_ATTRIBUTES_WRITE) ;
-		      app.setColoringAttributes (ca) ;
-		      TransparencyAttributes ta = new TransparencyAttributes () ;
-		      ta.setTransparency (0.8f) ;
-		      ta.setTransparencyMode (TransparencyAttributes.FASTEST) ;
-		      app.setTransparencyAttributes (ta);
-		      PolygonAttributes pa = new PolygonAttributes () ;
-		      pa.setCullFace (PolygonAttributes.CULL_NONE) ;
-		      app.setPolygonAttributes (pa);
-		      cylinder.setAppearance (app) ;
-		      objTrans.addChild (cylinder) ;
-		      Appearance app2 = new Appearance () ;
-		      app2.setColoringAttributes (ca2); 
-		      app2.setTransparencyAttributes (ta);
-		      app2.setPolygonAttributes (pa);
-		      Box box = new Box (0.025f, (float)length.length () / 2.0f - 0.6f, 0.025f, app2) ;
-		      objTrans.addChild (box) ;
-		      return (objTrans) ;
-		   }
-	   
-	  static public TransformGroup createLine2 (Vector3d from, Vector3d to, Color3f color) {
-	      Transform3D translation = new Transform3D () ;
-	      Vector3d middle = new Vector3d (from) ;
-	      middle.add (to) ;
-	      middle.set (middle.getX () / 2, middle.getY () / 2, middle.getZ () / 2) ;
-	      Vector3d y = new Vector3d (0, 1, 0) ;
-	      Vector3d length = new Vector3d () ;
-	      length.sub (to, from) ;
-	      Vector3d rotationAxis = new Vector3d () ;
-	      rotationAxis.cross (y, length) ;
-	      Quat4d rotation = new Quat4d () ;
-	      rotation.set (new AxisAngle4d (rotationAxis.getX (), rotationAxis.getY (), rotationAxis.getZ (), y.angle (length))) ;      
-	      translation.setRotation (rotation) ;
-	      translation.setTranslation (middle) ;
-	      //translation.setScale (new Vector3d (1, length.length (), 1)) ;
-	      TransformGroup objTrans = new TransformGroup (translation) ;
-	      objTrans.setCapability (TransformGroup.ALLOW_TRANSFORM_WRITE) ;
-	      objTrans.setCapability (TransformGroup.ALLOW_TRANSFORM_READ) ;
-	      //objTrans.setCapability (TransformGroup.ENABLE_PICK_REPORTING) ;
-	      Cylinder cylinder = new Cylinder (2.0f, (float)length.length ()) ;
-	      //cylinder.getShape (Cylinder.BODY).getGeometry ().setCapability (Geometry.ALLOW_INTERSECT) ;
-	      cylinder.getShape (Cylinder.BOTTOM).removeAllGeometries () ;
-	      cylinder.getShape (Cylinder.TOP).removeAllGeometries () ;
-	      Appearance app = new Appearance () ;
-	      ColoringAttributes ca = new ColoringAttributes () ;
-	      ca.setColor (color) ;
-	      app.setCapability (Appearance.ALLOW_COLORING_ATTRIBUTES_WRITE) ;
-	      app.setColoringAttributes (ca) ;
-	      TransparencyAttributes ta = new TransparencyAttributes () ;
-	      ta.setTransparency (0.8f) ;
-	      ta.setTransparencyMode (TransparencyAttributes.FASTEST) ;
-	      app.setTransparencyAttributes (ta);
-	      PolygonAttributes pa = new PolygonAttributes () ;
-	      pa.setCullFace (PolygonAttributes.CULL_NONE) ;
-	      app.setPolygonAttributes (pa);
-	      cylinder.setAppearance (app) ;
-	      objTrans.addChild (cylinder) ;
-	      Box box = new Box (0.025f, (float)length.length () / 2.0f - 0.6f, 0.025f, app) ;
-	      objTrans.addChild (box) ;
-	      return (objTrans) ;
-	   }
 
+	   
+	 
 	static public BranchGroup loadFile (String filename, Vector3d v3d) {
 	      VrmlLoader loader = new VrmlLoader () ;
 	      BranchGroup objRoot = new BranchGroup () ;

@@ -1,55 +1,57 @@
 package fr.etma.navigator.timeRecorder;
 
 import fr.etma.navigator.control.Navigator;
+import fr.etma.navigator.shape.TubeShape;
 
 public class Supervisor {
 
 	protected Measurer measurer;
 	protected int numberOfImtermediates;
-	protected int currentCount;
+	protected int current;
 	protected boolean activated;
 
-	public Supervisor(Navigator navigator, int noi) {
-		measurer = new Measurer(navigator);
+	void setCurrent(int c) { 
+		current = c;
+		measurer.setCurrent(c);
+		}
+	
+	int getCurrent() { return current; }
+	
+	public Supervisor(Measurer measurer, int noi) {
+		this.measurer = measurer;
 		numberOfImtermediates = noi;
-		currentCount = 0;
-
+		setCurrent(0);
 	}
 
 	public void startTimeCount(Detector detector, double distance) {
 			System.out.println("startTimeCount (0) : activation");
 			measurer.start();
 			measurer.addDifference(distance);
-			measurer.record("GOOD STEP 0");
-			currentCount++;
+			measurer.record(0, true);
+			setCurrent(getCurrent()+1);
 	}
 
 	public void stopTimeCount(Detector detector, double distance) {
-			System.out.println("stopTimeCount ("+currentCount+") : acknowledge");
+			System.out.println("stopTimeCount ("+getCurrent()+") : acknowledge");
 			measurer.addDifference(distance);
-			measurer.record("GOOD STEP" + currentCount);
+			measurer.record(getCurrent(), true);
 			measurer.setFinished(true);
-			
+		
 	}
 
 	public void intermediateTimeCount(Detector detector, double distance) {
-			System.out.println("intermediateTimeCount (" + currentCount + ") : OK");
+			System.out.println("intermediateTimeCount (" + getCurrent() + ") : OK");
 			measurer.addDifference(distance);
-			measurer.record("GOOD STEP" + currentCount);
-			currentCount++;
-			
+			measurer.record(getCurrent(), true);
+			setCurrent(getCurrent() + 1);
 
 	}
 
-	public int getCurrentStep() {
-		return currentCount;
-	}
-
-	public boolean isCurrentStep(int id) {
-		if (currentCount == id) {
+	public boolean isCurrent(int id) {
+		if (getCurrent() == id) {
 			return true;
 		} 
-		measurer.record("WRONG STEP " + id);
+		measurer.record(id,false);
 		return false;
 	}
 

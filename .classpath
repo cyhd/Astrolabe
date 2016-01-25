@@ -5,14 +5,9 @@
 	<classpathentry kind="lib" path="lib/j3d-vrml97.jar"/>
 	<classpathentry kind="lib" path="lib/WiiRemoteJ.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Java3d"/>
-	<classpathentry kind="lib" path="lib/bluecove-2.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/bluecove-gpl-2.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/j3dcore.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="ProjetNavigation/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/j3dutils.jar"/>
-	<classpathentry kind="lib" path="lib/vecmath.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/Java3D/1.5.2/lib/ext/j3dcore.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/Java3D/1.5.2/lib/ext/j3dutils.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/Java3D/1.5.2/lib/ext/vecmath.jar"/>
+	<classpathentry kind="lib" path="lib/bluecove-2.1.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

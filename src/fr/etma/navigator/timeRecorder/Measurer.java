@@ -8,58 +8,52 @@ import javax.vecmath.Quat4d;
 import javax.vecmath.Vector3d;
 
 import fr.etma.navigator.control.Navigator;
+import fr.etma.navigator.shape.TubeShape;
 
 public class Measurer extends Thread {
 
 	protected Navigator navigator;
+	TubeShape[] tubeShapes;
 	protected boolean finished = false;
 	protected double length = 0.0;
 	protected double rotation = 0.0;
 	protected double duration = 0.0;
-	protected FileWriter outFile;
 	protected double precision;
 
 	protected double time = 0;
+	private int current = 0;
 
 	public void setFinished(boolean finished) {
 		this.finished = finished;
+		Logger.getInstance().close();
 	}
 
-	public Measurer(Navigator n) {
-		navigator = n;
-
-		String date = new Date(System.currentTimeMillis()).toString();
-		date = date.replace(' ', '_').replace(':', '_');
-		String fileName = "Exp_Intersemestre_" + date + ".txt";
-
-		try {
-			outFile = new FileWriter(fileName, true);
-			outFile.write("started" + '\n');
-			outFile.flush();
-
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+	public Measurer(Navigator navigator) {
+		this.navigator = navigator;
+		this.tubeShapes = null;
 	}
 
 	synchronized public void addDifference(double distance) {
 		precision = precision + distance;
 	}
-
+	
+	/**
+	 * record a random step with a name
+	 * @param pname step name given
+	 */
 	synchronized public void record(String pname) {
-		try {
-			outFile.write("step " + pname + "\n");
-			outFile.write("Duration : "
-					+ ((System.currentTimeMillis() - time) / 1000) + '\n');
-			outFile.write("Length : " + length + '\n');
-			outFile.write("Rotation : " + rotation + '\n');
-			outFile.write("Precision : " + precision + '\n');
-			outFile.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Logger.getInstance().recordXML(pname, duration,length,rotation, precision);
 	}
-
+	
+	/**
+	 * record the crossing of a target
+	 * @param id  id of the target
+	 * @param yes true it was the right sequential target (in order), false if the target crossed was not the next expected one (for example, a user crosses target 0 and the target 3 instead of target 1
+	 */
+	synchronized public void record(int id, boolean yes) {
+		Logger.getInstance().recordXML(id,yes, duration,length,rotation, precision);
+	}
+	
 	@Override
 	public void run() {
 		finished = false;
@@ -76,6 +70,7 @@ public class Measurer extends Thread {
 		previousOrientation = navigator.getHeadOrientationInGlobalFrame();
 		previousPosition = navigator.getSupportPositionInGlobalFrame();
 		while (!finished) {
+			// calcul camera TARGET
 			currentOrientation = navigator.getHeadOrientationInGlobalFrame();
 			currentPosition = navigator.getSupportPositionInGlobalFrame();
 			deltaPosition.negate(previousPosition);
@@ -94,28 +89,37 @@ public class Measurer extends Thread {
 			length = length + deltaPosition.length();
 			previousPosition.set(currentPosition);
 			previousOrientation.set(currentOrientation);
+			
+			/*
+			// distance CAMERA to CYLINDER
+			double distance = tubeShapes[Math.max(current-1,0)].distanceToPoint(navigator.getHeadPositionInGlobalFrame());
+			if (distance > 0.0) {
+				System.out.println(" sortie de: " + distance + " du tube " + current);
+			}
+			*/
+			
 			try {
 				Thread.sleep(20);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			
 		}
 		duration = System.currentTimeMillis() - time;
 		System.out.println("duration = " + duration / 1000);
 		System.out.println("length = " + length);
 		System.out.println("rotation = " + rotation);
 		System.out.println("precision = " + precision);
-		try {
-			outFile.write("Duration : " + (duration / 1000) + '\n');
-			outFile.write("Length : " + length + '\n');
-			outFile.write("Rotation : " + rotation + '\n');
-			outFile.write("Precision : " + precision + '\n');
-			outFile.flush();
-			outFile.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		record("final");
+	}
 
+	public void setCurrent(int c) {
+		this.current  = c;		
+	}
+
+	public void setTubeShapes(TubeShape[] tubeShapes) {
+		this.tubeShapes = tubeShapes;
 	}
 
 }
