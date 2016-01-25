@@ -7,7 +7,7 @@ With Linux, you will have to have to add an argument to the Java VM when running
 
 - How do I change the keyboard or mouse configuration ?
 
-You have to modify the NavigatorBehavior class (it inherits from the Java3D class that manages inputs).
+You have to modify the NavigatorBehavior class (it inherits from the Java3D class Behavior that manages inputs).
 
 - How can I update the logging information ?
 
@@ -16,3 +16,8 @@ The logger class is doing the logging, called by Measurer, the class whose calcu
 - Where is the camera ?
 
 The camera (the viewpoint) is managed in the Navigator class.
+
+- How to change the 3D path to follow ?
+
+The 3D maze is generated from the fr.etma.navigator.DemoNavigation class. Find the 'listePositions' table, it contains a list of points the 3D path is following - just change the point coordinates. Alternatively, the 'Trajectoires' directory contains more path definintions you can copy/paste.
+
