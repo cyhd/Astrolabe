@@ -28,7 +28,8 @@ import com.sun.j3d.utils.universe.ViewingPlatform;
 import fr.etma.navigator.control.Navigator;
 import fr.etma.navigator.control.keyboard.NavigatorBehavior;
 import fr.etma.navigator.control.network.PilotageServerSocket;
-import fr.etma.navigator.control.wiimote.PilotageWiimoteBluetooth;
+import fr.etma.navigator.control.wiimote.PilotageWiimoteVRPN;
+import fr.etma.navigator.control.wiimote.PilotageWiimoteWiiuseJ;
 import fr.etma.navigator.shape.ShapeFactory;
 import fr.etma.navigator.shape.TargetShape;
 import fr.etma.navigator.shape.TubeShape;
@@ -225,7 +226,7 @@ public class DemoNavigation extends JFrame {
 		locale.addBranchGraph(scene);
 		PilotageServerSocket pss = new PilotageServerSocket(navigator);
 		pss.start();
-		PilotageWiimoteBluetooth pwb = new PilotageWiimoteBluetooth(navigator);
+		PilotageWiimoteWiiuseJ pwb = new PilotageWiimoteWiiuseJ(navigator);
 
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

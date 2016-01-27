@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Dev\android-sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="D:\Dev2\ProjetNavigation\Android\Pilotage\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-922f5b59907075c60fa6ee80e78ab69e21a930a7.jar" />
+    </item>
+    <item
+        jar="C:\Users\cedri\.gradle\caches\modules-2\files-2.1\java3d\vecmath\1.3.1\a0ae4f51da409fa0c20fa0ca59e6bbc9413ae71d\vecmath-1.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a0ae4f51da409fa0c20fa0ca59e6bbc9413ae71d">
+        <dex dex="D:\Dev2\ProjetNavigation\Android\Pilotage\app\build\intermediates\pre-dexed\debug\vecmath-1.3.1-fd52d14751689f26543c36bc89659afb4dc58a22.jar" />
+    </item>
+
+</items>
