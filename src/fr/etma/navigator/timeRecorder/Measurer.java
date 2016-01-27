@@ -42,7 +42,7 @@ public class Measurer extends Thread {
 	 * @param pname step name given
 	 */
 	synchronized public void record(String pname) {
-		Logger.getInstance().recordXML(pname, duration,length,rotation, precision);
+		Logger.getInstance().recordXML(pname, duration /1000,length,rotation, precision);
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class Measurer extends Thread {
 	 * @param yes true it was the right sequential target (in order), false if the target crossed was not the next expected one (for example, a user crosses target 0 and the target 3 instead of target 1
 	 */
 	synchronized public void record(int id, boolean yes) {
-		Logger.getInstance().recordXML(id,yes, duration,length,rotation, precision);
+		Logger.getInstance().recordXML(id,yes, duration /1000 ,length,rotation, precision);
 	}
 	
 	@Override
@@ -90,6 +90,7 @@ public class Measurer extends Thread {
 			previousPosition.set(currentPosition);
 			previousOrientation.set(currentOrientation);
 			
+			duration = System.currentTimeMillis() - time;
 			/*
 			// distance CAMERA to CYLINDER
 			double distance = tubeShapes[Math.max(current-1,0)].distanceToPoint(navigator.getHeadPositionInGlobalFrame());
@@ -105,7 +106,7 @@ public class Measurer extends Thread {
 			}
 			
 		}
-		duration = System.currentTimeMillis() - time;
+		
 		System.out.println("duration = " + duration / 1000);
 		System.out.println("length = " + length);
 		System.out.println("rotation = " + rotation);

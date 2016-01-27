@@ -70,8 +70,7 @@ public class Logger {
 		try {
 			outFileXML.write("\n<step> ");
 			outFileXML.write("<name>" + pname + "</name>");
-			outFileXML.write("<duration>"
-					+ ((System.currentTimeMillis() - time0) / 1000) + "</duration>");
+			outFileXML.write("<duration>" + time0 + "</duration>");
 			outFileXML.write("<length>" + lgh + "</length>");
 			outFileXML.write("<rotation> " + rt + "</rotation>");
 			outFileXML.write("<precision>" + pre + "</precision>");
@@ -93,8 +92,7 @@ public class Logger {
 			else
 				outFileXML.write("WRONG");
 			outFileXML.write("</status>");
-			outFileXML.write("<duration>"
-					+ ((System.currentTimeMillis() - time0) / 1000) + "</duration>");
+			outFileXML.write("<duration>"+ time0 + "</duration>");
 			outFileXML.write("<length>" + lgh + "</length>");
 			outFileXML.write("<rotation> " + rt + "</rotation>");
 			outFileXML.write("<precision>" + pre + "</precision>");
