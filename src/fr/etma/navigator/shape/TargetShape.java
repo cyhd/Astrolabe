@@ -37,7 +37,7 @@ public class TargetShape extends TransformGroup {
 		translation.setRotation(getRotation1(v3d, nextV3d));
 
 		translation.setTranslation(v3d);
-		translation.setScale(new Vector3d(1.3, 0.05, 1.3));
+		translation.setScale(new Vector3d(1.3, 0.1, 1.3));
 
 		this.setTransform(translation);
 
