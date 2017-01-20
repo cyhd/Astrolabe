@@ -1,6 +1,8 @@
 package fr.etma.navigator;
 
 import java.awt.GraphicsConfiguration;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
@@ -40,7 +42,7 @@ import fr.etma.navigator.timeRecorder.StartTimeCountDetector;
 import fr.etma.navigator.timeRecorder.StopTimeCountDetector;
 import fr.etma.navigator.timeRecorder.Supervisor;
 
-public class DemoNavigation extends JFrame {
+public class DemoNavigation extends JFrame implements WindowListener {
 
 	/**
     * 
@@ -51,6 +53,7 @@ public class DemoNavigation extends JFrame {
 	private TransformGroup viewpointTG = new TransformGroup();
 	private Supervisor supervisor;
 	private TubeShape[] tubeShapes;
+	private PilotageWiimoteWiiuseJ pwb; 
 
 	public BranchGroup createSceneGraph(Vector3d[] listePositions) {
 		// Create the root of the branch graph
@@ -148,8 +151,11 @@ public class DemoNavigation extends JFrame {
 	}
 
 	public DemoNavigation() {
-		setSize(800, 600);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setSize(800, 600);
+		this.setLocation(410, 0);
+		this.setTitle("Navigation 3D");
+		this.addWindowListener(this);
+		
 		GraphicsConfiguration config = SimpleUniverse
 				.getPreferredConfiguration();
 		canvas3D = new Canvas3D(config);
@@ -226,10 +232,10 @@ public class DemoNavigation extends JFrame {
 		locale.addBranchGraph(scene);
 		PilotageServerSocket pss = new PilotageServerSocket(navigator);
 		pss.start();
-		PilotageWiimoteWiiuseJ pwb = new PilotageWiimoteWiiuseJ(navigator);
+		pwb = new PilotageWiimoteWiiuseJ(navigator);
 
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 
 	public void destroy() {
@@ -238,5 +244,58 @@ public class DemoNavigation extends JFrame {
 
 	public static void main(String[] args) {
 		new DemoNavigation();
+	}
+
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		
+		pwb.disconnect();
+		
+		pwb.dispose();
+		this.dispose();
+		System.exit(444);		
+	}
+
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

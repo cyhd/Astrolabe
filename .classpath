@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/wiiusej-lib-0.13.jar"/>
 	<classpathentry kind="lib" path="lib/j3d-vrml97.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Java3d"/>
-	<classpathentry kind="lib" path="lib/vrpn.jar"/>
-	<classpathentry kind="lib" path="lib/wiiuseJ.jar"/>
 	<classpathentry kind="lib" path="lib/j3dcore.jar"/>
 	<classpathentry kind="lib" path="lib/j3dutils.jar"/>
 	<classpathentry kind="lib" path="lib/vecmath.jar"/>
+	<classpathentry kind="lib" path="lib/vrpn.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
