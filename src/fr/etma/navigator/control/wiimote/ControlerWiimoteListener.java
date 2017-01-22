@@ -250,6 +250,7 @@ public class ControlerWiimoteListener implements WiimoteListener {
 					navigator.supportTranslateInHeadFrame(0.0, -ac.getY()
 							* gainTranslation, 0.0);
 				}
+				
 			} else { //B
 				if (zModeAndNotYMode) { //1
 					Quat4d rotation = new Quat4d();
