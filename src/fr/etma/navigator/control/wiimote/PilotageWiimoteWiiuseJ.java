@@ -16,6 +16,8 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import com.github.awvalenti.wiiusej.WiiusejNativeLibraryLoadingException;
+
 import fr.etma.navigator.control.Navigator;
 import wiiusej.WiiUseApiManager;
 import wiiusej.Wiimote;
@@ -26,16 +28,16 @@ public class PilotageWiimoteWiiuseJ extends JFrame {
 
 	private Wiimote wiimote;
 	private ControlerWiimoteListener controlerWiimote;
-	
+
 	private JLabel status;
 	private JButton connectDisconnectButton;
 	private ActionListener connectionListener;
 	private ActionListener disconnectionListener;
 
-	double seuilSensibiliteRotation = 0.02;
-	double seuilSensibiliteTranslation = 5.0;
-	double gainRotation = 0.001;
-	double gainTranslation = 0.2;
+	//double seuilSensibiliteRotation = 0.02;
+	double seuilSensibiliteTranslation = 0.1;
+	double gainRotation = 0.01; 
+	double gainTranslation = 0.1;
 
 	public PilotageWiimoteWiiuseJ(final Navigator navigator) {
 
@@ -48,30 +50,38 @@ public class PilotageWiimoteWiiuseJ extends JFrame {
 			}
 		});
 
-
 		buildInterface();
-		
-		controlerWiimote = new ControlerWiimoteListener(navigator, this);
-		
-	}
-	
-	
 
-	
+		controlerWiimote = new ControlerWiimoteListener(navigator, this);
+
+	}
+
 	public boolean connect() {
-		Wiimote[] wiimotes = WiiUseApiManager.getWiimotes(1, true); // ,
-																	// WiiUseApiManager.WIIUSE_STACK_MS);
-		if (wiimotes.length > 0) {
-			wiimote = wiimotes[0];
-			//wiimote.activateContinuous();
-			//wiimote.activateSmoothing();
-			wiimote.addWiiMoteEventListeners( controlerWiimote);
-			connectDisconnectButton.removeActionListener(connectionListener);			
-			connectDisconnectButton.addActionListener(disconnectionListener);
-			connectDisconnectButton.setText("Disconnect");
-			status.setText(wiimotes[0] + " connected.");
-		} else {
-			status.setText("No wiimotes found !!!");
+		WiiUseApiManager wm;
+		try {
+			wm = new WiiUseApiManager();
+
+			Wiimote[] wiimotes = wm.getWiimotes(1); // , true); // ,
+													// WiiUseApiManager.WIIUSE_STACK_MS);
+			if (wiimotes.length > 0) {
+				wiimote = wiimotes[0];
+				wiimote.activateContinuous();
+				//wiimote.activateSmoothing();
+				wiimote.activateMotionSensing();
+				wiimote.addWiiMoteEventListeners(controlerWiimote);
+				connectDisconnectButton
+						.removeActionListener(connectionListener);
+				connectDisconnectButton
+						.addActionListener(disconnectionListener);
+				connectDisconnectButton.setText("Disconnect");
+				status.setText(wiimotes[0] + " connected.");
+			} else {
+				status.setText("No wiimotes found !!!");
+				return false;
+			}
+		} catch (WiiusejNativeLibraryLoadingException e) {
+			System.out.println("cannot load wiiuse dll.");
+			e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -89,93 +99,87 @@ public class PilotageWiimoteWiiuseJ extends JFrame {
 		}
 	}
 
-	
-
-	private void buildInterface() { 
+	private void buildInterface() {
 		JSlider sliderSeuilTranslation;
-		JSlider sliderSeuilRotation;
 		JSlider sliderGainTranslation;
 		JSlider sliderGainRotation;
-		
-		
+
 		connectDisconnectButton = new JButton("Connect");
-		connectionListener = new ActionListener() {public void actionPerformed(ActionEvent e) {	connect();	}};
-		disconnectionListener = new ActionListener() {public void actionPerformed(ActionEvent e) {  disconnect();	}};
+		connectionListener = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				connect();
+			}
+		};
+		disconnectionListener = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				disconnect();
+			}
+		};
 		connectDisconnectButton.addActionListener(connectionListener);
 		status = new JLabel("unknown");
 
-		final float seuilTranslationFactor = 1.0f;
+		final float seuilTranslationFactor = 100.0f;
 		final String labelTZstring = "Sensibility TZ:  ";
 		JLabel labelTZ = new JLabel(labelTZstring + seuilSensibiliteTranslation);
 
-		final float seuilRotationFactor = 100.0f;
-		final String labelRYstring = "Sensibility RY:  ";
-		JLabel labelRY = new JLabel(labelRYstring + seuilSensibiliteRotation);
-		
 		final double gainTranslationFactor = 100.0;
 		String gainTZstring = "Gain TZ:  ";
-		JLabel gainTZ = new JLabel(gainTZstring + gainTranslation );
+		JLabel gainTZ = new JLabel(gainTZstring + gainTranslation);
 		
-		final double gainRotationFactor = 1000.0;
+		final double gainRotationFactor = 250.0;
 		String gainRYstring = "Gain RY:  ";
 		JLabel gainRY = new JLabel(gainRYstring + gainRotation);
-		
+
 		// orientation, val de l unite minimale, val unite max, val courante
-		sliderSeuilTranslation = new JSlider(SwingConstants.HORIZONTAL, 0, 180, (int) (seuilSensibiliteTranslation * seuilTranslationFactor));
-		sliderSeuilTranslation.setMajorTickSpacing(100); 
-		sliderSeuilTranslation.setMinorTickSpacing(10); 
-		sliderSeuilTranslation.setPaintTicks(true); 
-		sliderSeuilTranslation.setPaintLabels(true); 
+		sliderSeuilTranslation = new JSlider(SwingConstants.HORIZONTAL, 0, (int) seuilTranslationFactor,
+				(int) (seuilSensibiliteTranslation * seuilTranslationFactor));
+		sliderSeuilTranslation.setMajorTickSpacing((int)seuilTranslationFactor / 2);
+		sliderSeuilTranslation.setMinorTickSpacing((int)seuilTranslationFactor / 10);
+		sliderSeuilTranslation.setPaintTicks(true);
+		sliderSeuilTranslation.setPaintLabels(true);
 		sliderSeuilTranslation.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				seuilSensibiliteTranslation = sliderSeuilTranslation.getValue() / seuilTranslationFactor;
+				seuilSensibiliteTranslation =  (sliderSeuilTranslation.getValue()
+						/ seuilTranslationFactor);
 				labelTZ.setText(labelTZstring + seuilSensibiliteTranslation);
 			}
 		});
 
-		sliderSeuilRotation = new JSlider(SwingConstants.HORIZONTAL, 0, 180,
-				(int) (seuilSensibiliteRotation * seuilRotationFactor));
-		sliderSeuilRotation.setMajorTickSpacing(100);
-		sliderSeuilRotation.setMinorTickSpacing(10);
-		sliderSeuilRotation.setPaintTicks(true);
-		sliderSeuilRotation.setPaintLabels(true);
-		sliderSeuilRotation.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				seuilSensibiliteRotation = sliderSeuilRotation.getValue() / seuilRotationFactor;
-				labelRY.setText(labelRYstring + seuilSensibiliteRotation);
-			}
-		});
-
-		sliderGainTranslation = new JSlider(SwingConstants.HORIZONTAL, 0, 180, (int) (gainTranslation * gainTranslationFactor));
-		sliderGainTranslation.setMajorTickSpacing(100); 
-		sliderGainTranslation.setMinorTickSpacing(10); 
-		sliderGainTranslation.setPaintTicks(true); 
-		sliderGainTranslation.setPaintLabels(true); 
+		
+		/* gainTranslation is varying between 0 and 1 
+		 * 
+		 */
+		sliderGainTranslation = new JSlider(SwingConstants.HORIZONTAL, 0, (int) gainTranslationFactor,
+				(int) (gainTranslation * gainTranslationFactor));
+		sliderGainTranslation.setMajorTickSpacing((int) gainTranslationFactor / 2);
+		sliderGainTranslation.setMinorTickSpacing((int) gainTranslationFactor / 10);
+		sliderGainTranslation.setPaintTicks(true);
+		sliderGainTranslation.setPaintLabels(true);
 		sliderGainTranslation.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				gainTranslation = sliderGainTranslation.getValue() / gainTranslationFactor;
-				gainTZ.setText(gainTZstring + gainTranslation );
+				gainTZ.setText(gainTZstring + gainTranslation);
 			}
 		});
-
-		sliderGainRotation = new JSlider(SwingConstants.HORIZONTAL, 0, 180, (int) (gainRotation * gainRotationFactor));
-		sliderGainRotation.setMajorTickSpacing(100); 
-		sliderGainRotation.setMinorTickSpacing(10); 
-		sliderGainRotation.setPaintTicks(true); 
-		sliderGainRotation.setPaintLabels(true); 
+		
+		sliderGainRotation = new JSlider(SwingConstants.HORIZONTAL, 1, (int)gainRotationFactor,
+				(int) (1.0 / gainRotation));
+		sliderGainRotation.setMajorTickSpacing((int) (gainRotationFactor / 2.0));
+		sliderGainRotation.setMinorTickSpacing((int) (gainRotationFactor / 10.0));
+		sliderGainRotation.setPaintTicks(true);
+		sliderGainRotation.setPaintLabels(true);
 		sliderGainRotation.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				gainRotation = sliderGainRotation.getValue() / gainRotationFactor;
+				gainRotation = 1.0f / sliderGainRotation.getValue();
 				gainRY.setText(gainRYstring + gainRotation);
 			}
 		});
-
+		
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayout(8, 2));
+		mainPanel.setLayout(new GridLayout(6, 2));
 		mainPanel.add(new JLabel("Connection to Wiimote"));
 		mainPanel.add(connectDisconnectButton);
 
@@ -183,27 +187,22 @@ public class PilotageWiimoteWiiuseJ extends JFrame {
 		mainPanel.add(status);
 		mainPanel.add(labelTZ);
 		mainPanel.add(sliderSeuilTranslation);
-		mainPanel.add(labelRY);
-		mainPanel.add(sliderSeuilRotation);
 		mainPanel.add(gainTZ);
 		mainPanel.add(sliderGainTranslation);
 		mainPanel.add(gainRY);
 		mainPanel.add(sliderGainRotation);
+		
 		getContentPane().add(mainPanel);
 		pack();
 		setVisible(true);
 	}
 
-	public double getSeuilSensibiliteRotation() {
-		return seuilSensibiliteRotation;
-	}
-
 	public double getGainRotation() {
-		return gainRotation;
+		return gainRotation * Math.PI / 180.0;
 	}
 
 	public double getSeuilSensibiliteTranslation() {
-		return seuilSensibiliteTranslation;
+		return seuilSensibiliteTranslation ;
 	}
 
 	public double getGainTranslation() {
