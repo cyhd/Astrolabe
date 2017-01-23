@@ -292,12 +292,29 @@ public class ControlerWiimoteListener implements WiimoteListener {
 		
 		if (be.isButtonOneJustPressed()) {
 			System.out.println("1 pressed - Z mode");
-			zModeAndNotYMode = true;
+			translationThread = new TranslationThread(navigator, new Vector3d(
+					0, 0, gainTranslation));
+			translationThread.start();
+			//zModeAndNotYMode = true;
 		}
+		if(be.isButtonOneJustReleased()){
+			System.out.println("1 realeased");
+			translationThread.finish();
+		}
+		
 		
 		if (be.isButtonTwoJustPressed() ) {
 			System.out.println("2 pressed - Y mode");
-			zModeAndNotYMode = false;
+			System.out.println("Up pressed");
+			translationThread = new TranslationThread(navigator, new Vector3d(
+					0, 0, -gainTranslation));
+			translationThread.start();
+			//zModeAndNotYMode = false;
+		}
+		
+		if (be.isButtonTwoJustReleased()){
+			System.out.println("2 realeased");
+			translationThread.finish();
 		}
 		
 		if (be.isButtonAJustPressed()) {
@@ -305,78 +322,90 @@ public class ControlerWiimoteListener implements WiimoteListener {
 			accelerationActivated = true;
 			translationModeAndNotRotationMode = true;
 		}
+		if (be.isButtonAJustReleased()) {
+			System.out.println("A released");
+			accelerationActivated = false;
+		}
 		
 		if (be.isButtonBJustPressed()) {
-			System.out.println("B pressed - Rotation mode");
-			accelerationActivated = true;
-			translationModeAndNotRotationMode = false;
+			System.out.println("B pressed");
+			translationThread.finish();
+			rotationThread.finish();
+			//accelerationActivated = true;
+			//translationModeAndNotRotationMode = false;
+		}
+		if (be.isButtonBJustReleased()) {
+			//System.out.println("Home released");
+			//accelerationActivated = false;
 		}
 		
 		if (be.isButtonMinusJustPressed())
 			System.out.println("Minus pressed");
 		
-		if (be.isButtonLeftJustPressed()) {
-			System.out.println("Left pressed");
-			Quat4d rotation = new Quat4d();
-			rotation.set(new AxisAngle4d(0, 1, 0, gainRotation));
-			rotationThread = new RotationThread(navigator, rotation);
-			rotationThread.start();
-		}
-		
-		if (be.isButtonRightJustPressed()) {
-			System.out.println("Right pressed");
-			Quat4d rotation = new Quat4d();
-			rotation.set(new AxisAngle4d(0, 1, 0, -gainRotation));
-			rotationThread = new RotationThread(navigator, rotation);
-			rotationThread.start();
-		}
-		
-		if (be.isButtonDownJustPressed()) {
-			System.out.println("Down pressed");
-			translationThread = new TranslationThread(navigator, new Vector3d(
-					0, 0, gainTranslation));
-			translationThread.start();
-		}
-		if (be.isButtonUpJustPressed()) {
-			System.out.println("Up pressed");
-			translationThread = new TranslationThread(navigator, new Vector3d(
-					0, 0, -gainTranslation));
-			translationThread.start();
-		}
-		if (be.isButtonPlusJustPressed())
-			System.out.println("Plus pressed");
-	
-		if (be.isButtonAJustReleased()) {
-			System.out.println("A released");
-			accelerationActivated = false;
-		}
-
-		if (be.isButtonBJustReleased()) {
-			System.out.println("Home released");
-			accelerationActivated = false;
-		}
-		
 		if (be.isButtonMinusJustReleased())
 			System.out.println("Minus released");
 		
+		if (be.isButtonLeftJustPressed()) {
+			System.out.println("Left pressed");
+			Quat4d rotation = new Quat4d();
+			rotation.set(new AxisAngle4d(1, 0, 0, -gainRotation));
+			rotationThread = new RotationThread(navigator, rotation);
+			rotationThread.start();
+		}
 		
 		if (be.isButtonLeftJustReleased()) {
 			System.out.println("Left released");
 			rotationThread.finish();
 		}
+		
+		if (be.isButtonRightJustPressed()) {
+			System.out.println("Right pressed");
+			Quat4d rotation = new Quat4d();
+			rotation.set(new AxisAngle4d(1, 0, 0, gainRotation));
+			rotationThread = new RotationThread(navigator, rotation);
+			rotationThread.start();
+		}
+		
 		if (be.isButtonRightJustReleased()) {
 			System.out.println("Right released");
 			rotationThread.finish();
 		}
+		
+		if (be.isButtonDownJustPressed()) {
+			Quat4d rotation = new Quat4d();
+			rotation.set(new AxisAngle4d(0, 1, 0, -gainRotation));
+			rotationThread = new RotationThread(navigator, rotation);
+			rotationThread.start();
+			//translationThread = new TranslationThread(navigator, new Vector3d(
+			//		0, 0, gainTranslation));
+			//translationThread.start();
+		}
+
 		if (be.isButtonDownJustReleased()) {
 			System.out.println("Down released");
-			translationThread.finish();
+			rotationThread.finish();
+			//translationThread.finish();
+		}
+		
+		if (be.isButtonUpJustPressed()) {
+			System.out.println("Up pressed");
+			Quat4d rotation = new Quat4d();
+			rotation.set(new AxisAngle4d(0, 1, 0, gainRotation));
+			rotationThread = new RotationThread(navigator, rotation);
+			rotationThread.start();
+			//translationThread = new TranslationThread(navigator, new Vector3d(
+			//		0, 0, -gainTranslation));
+			//translationThread.start();
 		}
 		if (be.isButtonUpJustReleased()) {
 			System.out.println("Up released");
-			translationThread.finish();
+			rotationThread.finish();
+			//translationThread.finish();
 		}
 		;
+		
+		if (be.isButtonPlusJustPressed())
+			System.out.println("Plus pressed");
 		if (be.isButtonPlusJustReleased())
 			System.out.println("Plus released");
 	}

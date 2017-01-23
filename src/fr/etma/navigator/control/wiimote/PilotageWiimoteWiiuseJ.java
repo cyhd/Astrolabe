@@ -36,7 +36,8 @@ public class PilotageWiimoteWiiuseJ extends JFrame {
 
 	//double seuilSensibiliteRotation = 0.02;
 	double seuilSensibiliteTranslation = 0.1;
-	double gainRotation = 0.01; 
+	double gainRotation = 0.8;
+	//double gainRotation = 0.01; 
 	double gainTranslation = 0.1;
 
 	public PilotageWiimoteWiiuseJ(final Navigator navigator) {
