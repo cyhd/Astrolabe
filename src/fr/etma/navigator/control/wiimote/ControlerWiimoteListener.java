@@ -282,7 +282,6 @@ public class ControlerWiimoteListener implements WiimoteListener {
 	RotationThread rotationThreadDown;
 	RotationThread rotationThreadRight;
 	RotationThread rotationThreadUp;
-	Boolean speed = false;
 	TranslationThread translationThread;
 	TranslationThread translationThreadOne;
 	TranslationThread translationThreadTwo;
@@ -300,12 +299,12 @@ public class ControlerWiimoteListener implements WiimoteListener {
 		
 		if (be.isButtonOneJustPressed()) {
 			System.out.println("1 pressed");
-			/*if(be.isButtonTwoHeld()){
+			if(be.isButtonTwoHeld()){
 				System.out.println("speed up!");
 				translationThreadSpeed = new TranslationThread(navigator, new Vector3d(
 						0, 0, -3*gainTranslation));
 				translationThreadSpeed.start();
-			}*/
+			}
 			translationThreadOne = new TranslationThread(navigator, new Vector3d(
 					0, 0, gainTranslation));
 			translationThreadOne.start();
@@ -313,6 +312,7 @@ public class ControlerWiimoteListener implements WiimoteListener {
 		}
 		if(be.isButtonOneJustReleased()){
 			System.out.println("1 realeased");
+			if (translationThreadSpeed!=null)
 			translationThreadSpeed.finish();
 			translationThreadOne.finish();
 		}
@@ -320,34 +320,25 @@ public class ControlerWiimoteListener implements WiimoteListener {
 		
 		if (be.isButtonTwoJustPressed() ) {
 			System.out.println("2 pressed");
-			if(speed){
-				translationThreadSpeed = new TranslationThread(navigator, new Vector3d(
-						0, 0, -3*gainTranslation));
-			}
-			else{
-				translationThreadTwo = new TranslationThread(navigator, new Vector3d(
-						0, 0, -gainTranslation));
-				translationThreadTwo.start();
-			}
-
+			translationThreadTwo = new TranslationThread(navigator, new Vector3d(
+					0, 0, -gainTranslation));
+			translationThreadTwo.start();
 			//zModeAndNotYMode = false;
 		}
 		
 		if (be.isButtonTwoJustReleased()){
 			System.out.println("2 realeased");
-			translationThreadSpeed.finish();
 			translationThreadTwo.finish();
 		}
 		
 		if (be.isButtonAJustPressed()) {
 			System.out.println("A pressed - translation mode");
-			speed = !speed;
-			//accelerationActivated = true;
-			//translationModeAndNotRotationMode = true;
+			accelerationActivated = true;
+			translationModeAndNotRotationMode = true;
 		}
 		if (be.isButtonAJustReleased()) {
 			System.out.println("A released");
-			//accelerationActivated = false;
+			accelerationActivated = false;
 		}
 		
 		if (be.isButtonBJustPressed()) {

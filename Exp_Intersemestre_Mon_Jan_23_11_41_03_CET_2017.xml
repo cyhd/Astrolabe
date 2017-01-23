@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII" standalone="yes"?><test date='Mon_Jan_23_11_41_03_CET_2017'>
+<step> <id>0</id><status>RIGHT</status><duration>0.0</duration><length>0.0</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>4.406</duration><length>3.309645418337558</length><rotation> 0.37756126859631656</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>24.413</duration><length>28.89758121163116</length><rotation> 2.6324260715767034</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>28.627</duration><length>39.67597169499695</length><rotation> 2.706202106251356</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>28.669</duration><length>39.875971694996956</length><rotation> 2.706202106251356</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>30.935</duration><length>48.275971694997075</length><rotation> 2.706202106251356</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>30.975</duration><length>48.47597169499708</length><rotation> 2.706202106251356</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>37.265</duration><length>54.47597169499716</length><rotation> 2.7100294046665274</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>37.306</duration><length>54.675971694997166</length><rotation> 2.7100294046665274</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>38.999</duration><length>58.68470558663757</length><rotation> 2.7139249795198435</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>39.04</duration><length>58.88470558663757</length><rotation> 2.7139249795198435</rotation><precision>0.0</precision></step> 
+<step> <id>1</id><status>RIGHT</status><duration>54.888</duration><length>71.97248678880223</length><rotation> 3.80987412689401</rotation><precision>0.11893945870421654</precision></step> 
+<step> <id>1</id><status>WRONG</status><duration>55.276</duration><length>72.79227846559797</length><rotation> 3.869492267469602</rotation><precision>0.11893945870421654</precision></step> 
+<step> <id>2</id><status>RIGHT</status><duration>77.432</duration><length>140.92728695899274</length><rotation> 7.558554800013733</rotation><precision>0.9195662374905228</precision></step> 

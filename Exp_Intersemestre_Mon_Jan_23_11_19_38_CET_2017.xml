@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII" standalone="yes"?><test date='Mon_Jan_23_11_19_38_CET_2017'>
+<step> <id>0</id><status>RIGHT</status><duration>0.0</duration><length>0.0</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>0.02</duration><length>0.10000000000000063</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
+<step> <id>1</id><status>RIGHT</status><duration>1.832</duration><length>6.300000000000057</length><rotation> 0.3099999999998894</rotation><precision>0.8159519327056729</precision></step> 
+<step> <id>8</id><status>WRONG</status><duration>22.542</duration><length>60.80000000000106</length><rotation> 8.39285572428863</rotation><precision>0.8159519327056729</precision></step> 
+<step> <id>8</id><status>WRONG</status><duration>22.604</duration><length>61.10000000000107</length><rotation> 8.405852796142725</rotation><precision>0.8159519327056729</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>37.111</duration><length>112.50000000000412</length><rotation> 12.128284564397005</rotation><precision>0.8159519327056729</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>37.172</duration><length>112.80000000000415</length><rotation> 12.137066985201583</rotation><precision>0.8159519327056729</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>43.447</duration><length>127.6000000000054</length><rotation> 24.444321331513216</rotation><precision>0.8159519327056729</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>50.49</duration><length>139.60000000000477</length><rotation> 29.85093366577204</rotation><precision>0.8159519327056729</precision></step> 
+<step> <id>2</id><status>RIGHT</status><duration>59.076</duration><length>181.80000000000237</length><rotation> 31.072051661572765</rotation><precision>1.3272898270865623</precision></step> 
+<step> <id>3</id><status>RIGHT</status><duration>63.374</duration><length>197.1999655541707</length><rotation> 32.12554487302935</rotation><precision>1.964670736876216</precision></step> 
+<step> <id>1</id><status>WRONG</status><duration>74.123</duration><length>242.89989838214223</length><rotation> 34.03176779260276</rotation><precision>1.964670736876216</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>75.297</duration><length>248.6998983821419</length><rotation> 37.1711750063788</rotation><precision>1.964670736876216</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>75.339</duration><length>248.89989838214188</length><rotation> 37.1711750063788</rotation><precision>1.964670736876216</precision></step> 

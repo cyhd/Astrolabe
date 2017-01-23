@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII" standalone="yes"?><test date='Mon_Jan_23_15_33_25_CET_2017'>
+<step> <id>0</id><status>RIGHT</status><duration>0.0</duration><length>0.0</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
+<step> <id>1</id><status>RIGHT</status><duration>0.383</duration><length>5.700000000000001</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
+<step> <id>1</id><status>WRONG</status><duration>0.403</duration><length>6.000000000000002</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
+<step> <id>2</id><status>RIGHT</status><duration>11.49</duration><length>73.33015228357607</length><rotation> 2.4829719885002057</rotation><precision>0.8132846763520295</precision></step> 
+<step> <id>3</id><status>RIGHT</status><duration>14.555</duration><length>87.1262161628913</length><rotation> 3.242119431700424</rotation><precision>0.9468706187804339</precision></step> 
+<step> <id>4</id><status>RIGHT</status><duration>18.917</duration><length>104.85431159921005</length><rotation> 4.245111862364442</rotation><precision>1.4635772646875393</precision></step> 
+<step> <id>6</id><status>WRONG</status><duration>33.473</duration><length>136.45839627797739</length><rotation> 11.288633655870607</rotation><precision>1.4635772646875393</precision></step> 
+<step> <id>5</id><status>RIGHT</status><duration>35.683</duration><length>147.3563702914584</length><rotation> 11.622992574295065</rotation><precision>1.534260530602307</precision></step> 
