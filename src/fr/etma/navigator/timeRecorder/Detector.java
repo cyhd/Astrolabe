@@ -22,11 +22,17 @@ public abstract class Detector {
 	public abstract void doit(double distance);
 	
 	public void begin(double distance) {
+		  // check step passed through is the right one
 	      if  ((supervisor.isCurrent(getId()))&&(! fired)) {
 	          fired = true ;
 	          doit(distance);
 	       }
-	      else System.out.println( "Go to step " + supervisor.getCurrent() + " before step " + getId() + "!"  );
+	      else {
+	    	  if  (fired)
+	    		  	  System.out.println( "Go to step " + supervisor.getCurrent() + " now, already passed through " + getId()  );
+	    	  else if (!supervisor.isCurrent(getId()))
+	    			  System.out.println( "Go to step " + supervisor.getCurrent() + " before step " + getId() + "!"  );
+	      }
 	    }
 
 
