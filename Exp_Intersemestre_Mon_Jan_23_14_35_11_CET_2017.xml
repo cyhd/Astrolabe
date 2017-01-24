@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ASCII" standalone="yes"?><test date='Mon_Jan_23_14_35_11_CET_2017'>
+<step> <id>0</id><status>RIGHT</status><duration>0.001</duration><length>0.0</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>0.021</duration><length>0.10000000000000019</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
+<step> <id>1</id><status>RIGHT</status><duration>1.915</duration><length>5.999999999999981</length><rotation> 0.04363323129974799</rotation><precision>0.2610520683279044</precision></step> 
+<step> <id>2</id><status>RIGHT</status><duration>13.447</duration><length>42.6</length><rotation> 0.8028514559148462</rotation><precision>1.1123268128600197</precision></step> 

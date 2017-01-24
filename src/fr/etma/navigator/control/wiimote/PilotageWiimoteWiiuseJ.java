@@ -36,7 +36,8 @@ public class PilotageWiimoteWiiuseJ extends JFrame {
 
 	//double seuilSensibiliteRotation = 0.02;
 	double seuilSensibiliteTranslation = 0.1;
-	double gainRotation = 0.01; 
+	double gainRotation = 1;
+	//double gainRotation = 0.01; 
 	double gainTranslation = 0.1;
 
 	public PilotageWiimoteWiiuseJ(final Navigator navigator) {
@@ -65,7 +66,7 @@ public class PilotageWiimoteWiiuseJ extends JFrame {
 													// WiiUseApiManager.WIIUSE_STACK_MS);
 			if (wiimotes.length > 0) {
 				wiimote = wiimotes[0];
-				wiimote.activateContinuous();
+				//wiimote.activateContinuous();
 				//wiimote.activateSmoothing();
 				wiimote.activateMotionSensing();
 				wiimote.addWiiMoteEventListeners(controlerWiimote);

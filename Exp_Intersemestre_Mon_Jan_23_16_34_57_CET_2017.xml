@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII" standalone="yes"?><test date='Mon_Jan_23_16_34_57_CET_2017'>
+<step> <id>0</id><status>RIGHT</status><duration>0.0</duration><length>0.0</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
+<step> <id>1</id><status>RIGHT</status><duration>1.742</duration><length>5.314622807384224</length><rotation> 0.6440132927806699</rotation><precision>0.46971429924734753</precision></step> 
+<step> <id>2</id><status>RIGHT</status><duration>5.075</duration><length>41.91943454086178</length><rotation> 1.3072384085383784</rotation><precision>1.0522757387292963</precision></step> 
+<step> <id>2</id><status>WRONG</status><duration>5.116</duration><length>42.51959696500535</length><rotation> 1.342144993578255</rotation><precision>1.0522757387292963</precision></step> 
+<step> <id>3</id><status>RIGHT</status><duration>9.437</duration><length>59.699490441433426</length><rotation> 3.9945241604710215</rotation><precision>1.646951065721141</precision></step> 
+<step> <id>4</id><status>RIGHT</status><duration>11.694</duration><length>78.14386318920297</length><rotation> 8.032942200312078</rotation><precision>2.278002968749232</precision></step> 
+<step> <id>4</id><status>WRONG</status><duration>11.714</duration><length>78.44386318920297</length><rotation> 8.057624256703852</rotation><precision>2.278002968749232</precision></step> 
+<step> <id>4</id><status>WRONG</status><duration>11.714</duration><length>78.44386318920297</length><rotation> 8.057624256703852</rotation><precision>2.278002968749232</precision></step> 
+<step> <id>6</id><status>WRONG</status><duration>16.899</duration><length>111.26321798268619</length><rotation> 13.931519354994839</rotation><precision>2.278002968749232</precision></step> 
+<step> <id>7</id><status>WRONG</status><duration>19.88</duration><length>129.73065171548416</length><rotation> 15.526997738181112</rotation><precision>2.278002968749232</precision></step> 
+<step> <id>7</id><status>WRONG</status><duration>19.9</duration><length>129.73065171548416</length><rotation> 15.544451030701048</rotation><precision>2.278002968749232</precision></step> 
+<step> <id>8</id><status>WRONG</status><duration>23.215</duration><length>144.2306517154834</length><rotation> 22.910977708442406</rotation><precision>2.278002968749232</precision></step> 
+<step> <id>5</id><status>RIGHT</status><duration>28.643</duration><length>182.78825353391116</length><rotation> 25.831147792687045</rotation><precision>2.6316054899702754</precision></step> 
+<step> <id>5</id><status>WRONG</status><duration>31.698</duration><length>189.88819261197375</length><rotation> 27.611383629720894</rotation><precision>2.6316054899702754</precision></step> 
+<step> <id>6</id><status>RIGHT</status><duration>33.691</duration><length>199.78800984616123</length><rotation> 28.257155452958692</rotation><precision>2.7885259583993522</precision></step> 
+<step> <id>7</id><status>RIGHT</status><duration>36.204</duration><length>218.61467211892545</length><rotation> 29.304353004155033</rotation><precision>3.6301172463969937</precision></step> 
+<step> <id>8</id><status>RIGHT</status><duration>39.582</duration><length>233.26254125171351</length><rotation> 151.63102490431672</rotation><precision>4.388323142274299</precision></step> </test>
