@@ -1,4 +1,5 @@
 package fr.etma.navigator;
+import java.io.File;
 import java.util.Enumeration;
 
 import javax.media.j3d.Appearance;
@@ -13,6 +14,8 @@ import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 
 import fr.etma.navigator.timeRecorder.Detector;
+import fr.etma.navigator.timeRecorder.StartTimeCountDetector;
+import fr.etma.navigator.timeRecorder.StopTimeCountDetector;
 
 public class CollisionDetector extends Behavior {
 
@@ -79,6 +82,9 @@ public class CollisionDetector extends Behavior {
 			//shapeAppearance.setColoringAttributes (highlight) ;
 			if (detector != null) {
 			   detector.begin (deltaPosition.length ()) ;
+			   if (detector instanceof StartTimeCountDetector || detector instanceof StopTimeCountDetector) {
+				   detector = null;
+			   }
 			}
 			wakeupOn (wExit) ;
 		} else {

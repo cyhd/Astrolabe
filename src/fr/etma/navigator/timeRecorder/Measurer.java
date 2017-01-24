@@ -25,7 +25,6 @@ public class Measurer extends Thread {
 
 	public void setFinished(boolean finished) {
 		this.finished = finished;
-		
 	}
 
 	public Measurer(Navigator navigator) {
