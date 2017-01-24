@@ -11,6 +11,10 @@ public class StartTimeCountDetector extends Detector {
       System.out.println ("supervisor.startTimeCount ()") ;
       supervisor.startTimeCount (this, distance) ;
       target.select();
+      if (nextTarget != null) {
+    	  nextTarget.setAware () ;
+    	  System.out.println ("setAware") ;
+      }
    }
 
    @Override
