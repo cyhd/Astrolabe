@@ -212,11 +212,29 @@ public class DemoNavigation extends JFrame implements WindowListener {
 		viewingPlatform.compile();
 
 		// position des etapes du parcours
-		Vector3d[] listePositions = { new Vector3d(0, 0, -6),
-				new Vector3d(0, 0, -19), new Vector3d(-5, 0, -27),
-				new Vector3d(0, 2, -34), new Vector3d(0, 0, -45),
-				new Vector3d(-3, -2, -58), new Vector3d(-5, 0, -70),
-				new Vector3d(0, 2, -86), new Vector3d(7, 3, -100)};
+		//*
+		Vector3d[] listePositions = { new Vector3d(0, 0, -5),
+				new Vector3d(0, 0, -15), new Vector3d(-9, 0, -25),
+				new Vector3d(-7, 3, -35), new Vector3d(-1, 2, -45),
+				new Vector3d(1, 0, -55), new Vector3d(6, -2, -65),
+				new Vector3d(1, -5, -80), new Vector3d(10, -6, -100),
+				new Vector3d(12, -3, -105) };//*/
+		
+		/*
+		Vector3d[] listePositions = { new Vector3d(0, 0, -5),
+				new Vector3d(0, 0, -15), new Vector3d(-2, -3, -20),
+				new Vector3d(-11, -2, -30), new Vector3d(-6, 1, -40),
+				new Vector3d(1, -2, -55), new Vector3d(4, 2, -60),
+				new Vector3d(11, 7, -57), new Vector3d(18, 3, -53),
+				new Vector3d(24, 1, -45) };//*/
+		
+		/*
+		Vector3d[] listePositions = { new Vector3d(0, 0, -5),
+				new Vector3d(0, 0, -15), new Vector3d(-4, 2, -25),
+				new Vector3d(-10, -2, -30), new Vector3d(-12, 0, -37),
+				new Vector3d(-9, 2, -45), new Vector3d(-1, 3, -60),
+				new Vector3d(2, -1, -65), new Vector3d(18, 1, -75),
+				new Vector3d(24, 4, -100) };//*/
 		
 		// universe.getViewingPlatform ().setNominalViewingTransform () ;
 		Measurer measurer = new Measurer(navigator);
