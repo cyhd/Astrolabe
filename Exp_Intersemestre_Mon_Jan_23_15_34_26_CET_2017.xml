@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="ASCII" standalone="yes"?><test date='Mon_Jan_23_15_34_26_CET_2017'>
-<step> <id>0</id><status>RIGHT</status><duration>0.0</duration><length>0.0</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
-<step> <id>1</id><status>RIGHT</status><duration>1.213</duration><length>5.79999999999999</length><rotation> 0.19198621771917077</rotation><precision>0.37303636423822745</precision></step> 
-<step> <id>2</id><status>RIGHT</status><duration>5.814</duration><length>43.58960764762926</length><rotation> 1.3966253653003957</rotation><precision>0.5188514481531105</precision></step> 
-<step> <id>2</id><status>WRONG</status><duration>11.914</duration><length>44.48960764762927</length><rotation> 7.092177362670294</rotation><precision>0.5188514481531105</precision></step> 
