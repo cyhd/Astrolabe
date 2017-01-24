@@ -217,7 +217,7 @@ public class DemoNavigation extends JFrame implements WindowListener {
 				new Vector3d(-10, 0, -40), new Vector3d(0, -10, -30),
 				new Vector3d(10, 0, -20), new Vector3d(20, 0, -20),
 				new Vector3d(30, 10, -10), new Vector3d(40, 10, 0) };
-
+		
 		// universe.getViewingPlatform ().setNominalViewingTransform () ;
 		Measurer measurer = new Measurer(navigator);
 		supervisor = new Supervisor(measurer, listePositions.length - 2);

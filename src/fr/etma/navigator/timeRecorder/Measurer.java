@@ -25,7 +25,7 @@ public class Measurer extends Thread {
 
 	public void setFinished(boolean finished) {
 		this.finished = finished;
-		Logger.getInstance().close();
+		
 	}
 
 	public Measurer(Navigator navigator) {
@@ -113,6 +113,8 @@ public class Measurer extends Thread {
 		System.out.println("precision = " + precision);
 		
 		record("final");
+		
+		Logger.getInstance().close();
 	}
 
 	public void setCurrent(int c) {

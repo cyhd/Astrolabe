@@ -30,6 +30,7 @@ public class TargetShape extends TransformGroup {
 
 	public TargetShape(int id, Vector3d v3d, Vector3d nextV3d, Color3f color,
 			Color3f collisionColor, Detector detector) {
+		
 		super();
 
 		this.id = id;
@@ -118,10 +119,8 @@ public class TargetShape extends TransformGroup {
 		PolygonAttributes pa = new PolygonAttributes();
 		pa.setCullFace(PolygonAttributes.CULL_NONE);
 		shapeAppearance.setPolygonAttributes(pa);
-		CollisionDetector cd = new CollisionDetector(box, collisionColor,
-				detector);
-		BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0),
-				1.0);
+		CollisionDetector cd = new CollisionDetector(box, collisionColor, detector);
+		BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 1.0);
 		cd.setSchedulingBounds(bounds);
 		Appearance smallApp = new Appearance();
 		ColoringAttributes smallca = new ColoringAttributes();
