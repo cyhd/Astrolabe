@@ -316,8 +316,6 @@ public class ControlerWiimoteListener implements WiimoteListener {
 			translationThreadSpeed.finish();
 			translationThreadOne.finish();
 		}
-		
-		
 		if (be.isButtonTwoJustPressed() ) {
 			System.out.println("2 pressed");
 			translationThreadTwo = new TranslationThread(navigator, new Vector3d(
@@ -345,8 +343,8 @@ public class ControlerWiimoteListener implements WiimoteListener {
 			System.out.println("B pressed");
 			//translationThread.finish();
 			//rotationThread.finish();
-			//accelerationActivated = true;
-			//translationModeAndNotRotationMode = false;
+			accelerationActivated = true;
+			translationModeAndNotRotationMode = false;
 		}
 		if (be.isButtonBJustReleased()) {
 			//System.out.println("Home released");
