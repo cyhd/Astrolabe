@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII" standalone="yes"?><test date='Mon_Jan_23_17_59_15_CET_2017'>
+<step> <id>0</id><status>RIGHT</status><duration>0.02</duration><length>0.09999999999999964</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
+<step> <id>0</id><status>WRONG</status><duration>0.02</duration><length>0.09999999999999964</length><rotation> 0.0</rotation><precision>0.0</precision></step> 
+<step> <id>1</id><status>RIGHT</status><duration>1.191</duration><length>5.899999999999984</length><rotation> 0.24434609527914988</rotation><precision>0.3923845266231325</precision></step> 
+<step> <id>2</id><status>RIGHT</status><duration>4.791</duration><length>43.94405749816146</length><rotation> 1.2289592402675347</rotation><precision>0.6298928708620284</precision></step> 
+<step> <id>2</id><status>WRONG</status><duration>7.577</duration><length>48.04405749816151</length><rotation> 3.196426999787199</rotation><precision>0.6298928708620284</precision></step> 
+<step> <id>3</id><status>RIGHT</status><duration>17.733</duration><length>89.69677737967983</length><rotation> 11.631837520342739</rotation><precision>0.8807215955146472</precision></step> 
+<step> <id>4</id><status>RIGHT</status><duration>26.963</duration><length>131.5321103876997</length><rotation> 41.78109710819352</rotation><precision>0.8997951181551531</precision></step> 
+<step> <id>5</id><status>RIGHT</status><duration>29.304</duration><length>150.40419355815885</length><rotation> 42.639364456351274</rotation><precision>1.4219724982576731</precision></step> 
+<step> <id>6</id><status>RIGHT</status><duration>32.77</duration><length>161.53898536114673</length><rotation> 44.36749313788922</rotation><precision>1.723789899442063</precision></step> 
+<step> <id>7</id><status>RIGHT</status><duration>35.294</duration><length>179.9067636206881</length><rotation> 45.01778910538119</rotation><precision>2.082287286071579</precision></step> 
+<step> <id>8</id><status>RIGHT</status><duration>39.912</duration><length>194.7262452844646</length><rotation> 46.619501532664</rotation><precision>2.462751148603452</precision></step> </test>
