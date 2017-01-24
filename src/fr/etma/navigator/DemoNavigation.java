@@ -212,11 +212,11 @@ public class DemoNavigation extends JFrame implements WindowListener {
 		viewingPlatform.compile();
 
 		// position des etapes du parcours
-		Vector3d[] listePositions = { new Vector3d(0, 0, -4),
-				new Vector3d(0, 0, -10), new Vector3d(-20, -10, -40),
-				new Vector3d(-10, 0, -40), new Vector3d(0, -10, -30),
-				new Vector3d(10, 0, -20), new Vector3d(20, 0, -20),
-				new Vector3d(30, 10, -10), new Vector3d(40, 10, 0) };
+		Vector3d[] listePositions = { new Vector3d(0, 0, -6),
+				new Vector3d(0, 0, -19), new Vector3d(-5, 0, -27),
+				new Vector3d(0, 2, -34), new Vector3d(0, 0, -45),
+				new Vector3d(-3, -2, -51), new Vector3d(-5, 0, -60),
+				new Vector3d(0, 2, -66), new Vector3d(7, 3, -74)};
 		
 		// universe.getViewingPlatform ().setNominalViewingTransform () ;
 		Measurer measurer = new Measurer(navigator);
