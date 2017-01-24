@@ -66,7 +66,7 @@ public class PilotageWiimoteWiiuseJ extends JFrame {
 													// WiiUseApiManager.WIIUSE_STACK_MS);
 			if (wiimotes.length > 0) {
 				wiimote = wiimotes[0];
-				wiimote.activateContinuous();
+				//wiimote.activateContinuous();
 				//wiimote.activateSmoothing();
 				wiimote.activateMotionSensing();
 				wiimote.addWiiMoteEventListeners(controlerWiimote);

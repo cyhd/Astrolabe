@@ -33,9 +33,10 @@ public class ControlerWiimoteListener implements WiimoteListener {
 
 	protected boolean accelerationActivated = false;
 	protected boolean zModeAndNotYMode = true;
-	protected boolean translationModeAndNotRotationMode = true;
+	protected boolean RotationMode = true;
 	protected boolean zModeAndNotYModeNunchuck = true;
 	protected boolean rotationModeNunchuck = false;
+	//public TranslationThread translationThread = new TranslationThread(navigator, new Vector3d(0, 0, 0));
 
 	public ControlerWiimoteListener(final Navigator navigator,
 			PilotageWiimoteWiiuseJ pilot) {
@@ -53,33 +54,33 @@ public class ControlerWiimoteListener implements WiimoteListener {
 	 */
 	@Override
 	public void onExpansionEvent(ExpansionEvent ee) {
+		//translationThread.start();
 		if (ee instanceof NunchukEvent) {
 			NunchukEvent nunchuk = (NunchukEvent) ee;
 
 			NunchukButtonsEvent buttons = nunchuk.getButtonsEvent();
 
-			if (buttons.isButtonCJustPressed()) {
-			}
 
-			if (buttons.isButtonZJustPressed()) {
-			}
 
-			if (buttons.isButtonCJustReleased()) {
+			/*if (buttons.isButtonZJustPressed()) {
+			}*/
+
+			/*if (buttons.isButtonCJustReleased()) {
 				if (rotationModeNunchuck)
 					System.out
 							.println("C released - rotation mode desactivated.");
 				else
 					System.out.println("C released - rotation mode activated.");
 				rotationModeNunchuck = !rotationModeNunchuck;
-			}
+			}*/
 
-			if (buttons.isButtonZJustReleased()) {
+			/*if (buttons.isButtonZJustReleased()) {
 				if (zModeAndNotYModeNunchuck)
 					System.out.println("Z released - z distance activated.");
 				else
 					System.out.println("Z released - z distance desactivated.");
 				zModeAndNotYModeNunchuck = !zModeAndNotYModeNunchuck;
-			}
+			}*/
 
 			double x = nunchuk.getNunchukJoystickEvent().getAngle();
 			double y = nunchuk.getNunchukJoystickEvent().getMagnitude();
@@ -91,14 +92,45 @@ public class ControlerWiimoteListener implements WiimoteListener {
 			/* test if reversing */
 			if (Math.abs(x) > 90)
 				y = -y;
-
+			//System.out.println("y : "+y);
+			//System.out.println("x : " + x);
 			/*
 			 * manage the Y axis rotation and moving forward from the nunchuk
 			 * joystick only move if joystick is not centered
 			 */
+			
+			
+			if (buttons.isButtonCJustPressed()) {
+			}
+			//Il faut que y > getSeuil etc....
 
-			if (Math.abs(y) > wiiInterface.getSeuilSensibiliteTranslation()) {
-
+			//double sensibilite = wiiInterface.getSeuilSensibiliteTranslation();
+			double sensibilite = 0.5;
+			if(Math.abs(y)>sensibilite && x<40 && x>-40 || (Math.abs(y)>sensibilite && Math.abs(x)>130)){ //joystick en avant
+				//translationThread.translation = new Vector3d(0, 0, x);
+				if(!buttons.isButtonCHeld())
+					navigator.supportTranslateInHeadFrame(0, 0, -4*y* wiiInterface.getGainTranslation());
+				else{
+					navigator.supportTranslateInHeadFrame(0, 4*y* wiiInterface.getGainTranslation(), 0);
+				}
+			}
+			if(Math.abs(y)>sensibilite && x >50 && x<130){ //Joystick a droite
+				Quat4d rotation = new Quat4d();
+				rotation.set(new AxisAngle4d(0, 1, 0, -x/100
+						* wiiInterface.getGainRotation()));
+				navigator.supportRotateInHeadFrame(rotation.x, rotation.y,
+						rotation.z, rotation.w);
+			}
+			if(Math.abs(y)>sensibilite && x <-50 && x>-130){ //Joystick a gauche
+				Quat4d rotation = new Quat4d();
+				rotation.set(new AxisAngle4d(0, 1, 0, -x/100
+						* wiiInterface.getGainRotation()));
+				navigator.supportRotateInHeadFrame(rotation.x, rotation.y,
+						rotation.z, rotation.w);
+			}
+			
+			/*if (Math.abs(y) > wiiInterface.getSeuilSensibiliteTranslation()) {
+				
 				Quat4d rotation = new Quat4d();
 				rotation.set(new AxisAngle4d(0, 1, 0, -x
 						* wiiInterface.getGainRotation()));
@@ -138,7 +170,7 @@ public class ControlerWiimoteListener implements WiimoteListener {
 				navigator.supportRotateInHeadFrame(rotation.x, rotation.y,
 						rotation.z, rotation.w);
 
-			}
+			}*/
 
 		}
 	}
@@ -231,8 +263,10 @@ public class ControlerWiimoteListener implements WiimoteListener {
 		
 		
 		if (accelerationActivated) {
-			if (translationModeAndNotRotationMode) { //A
-				if (zModeAndNotYMode) { //1
+			if (RotationMode) { 
+				//System.out.println("x : "+ac.getX()+"; y : "+ac.getY()+"; z : "+ac.getZ());//A
+				//seul Y est utile !
+				/*if (zModeAndNotYMode) { //1
 					Quat4d rotation = new Quat4d();
 					rotX += ac.getX();
 					rotation.set(new AxisAngle4d(0, 1, 0, rotX * gainRotation));
@@ -241,17 +275,23 @@ public class ControlerWiimoteListener implements WiimoteListener {
 							rotation.z, rotation.w);
 				//	navigator.supportTranslateInHeadFrame(0.0, 0.0, -ac.getY()
 				//			* gainTranslation);
-				} else { //2
+				} else */
+				{ //2
 					Quat4d rotation = new Quat4d();
-					rotation.set(new AxisAngle4d(0, 1, 0, -ac.getX()
-							* gainRotation));
+					System.out.println(""+ac.getX()+"; "+ac.getY());
+					rotation.set(new AxisAngle4d(-ac.getY(),-ac.getX()+0.04, 0, 0.03));
+					
 					navigator.supportRotateInHeadFrame(rotation.x, rotation.y,
 							rotation.z, rotation.w);
-					navigator.supportTranslateInHeadFrame(0.0, -ac.getY()
-							* gainTranslation, 0.0);
+					//navigator.supportTranslateInHeadFrame(0.0, 0.0, -ac.getY()* gainTranslation);
+					/*Quat4d rotation = new Quat4d();
+					rotation.set(new AxisAngle4d(0, 1, 0, -1* gainRotation));
+					navigator.supportRotateInHeadFrame(0, rotation.y,0, 0);
+					navigator.supportRotateInHeadFrame(rotation.x, rotation.y,rotation.z, rotation.w);
+					navigator.supportTranslateInHeadFrame(0.0, -ac.getY()* gainTranslation, 0.0);*/
 				}
 				
-			} else { //B
+			} /*else { //B
 				if (zModeAndNotYMode) { //1
 					Quat4d rotation = new Quat4d();
 					rotation.set(new AxisAngle4d(1, 0, 0, -ac.getY()
@@ -273,7 +313,7 @@ public class ControlerWiimoteListener implements WiimoteListener {
 					navigator.supportRotateInHeadFrame(rotation.x, rotation.y,
 							rotation.z, rotation.w);
 				}
-			}
+			}*/
 		}
 	}
 
@@ -282,7 +322,6 @@ public class ControlerWiimoteListener implements WiimoteListener {
 	RotationThread rotationThreadDown;
 	RotationThread rotationThreadRight;
 	RotationThread rotationThreadUp;
-	TranslationThread translationThread;
 	TranslationThread translationThreadOne;
 	TranslationThread translationThreadTwo;
 	TranslationThread translationThreadSpeed;
@@ -313,7 +352,7 @@ public class ControlerWiimoteListener implements WiimoteListener {
 		if(be.isButtonOneJustReleased()){
 			System.out.println("1 realeased");
 			if (translationThreadSpeed!=null)
-			translationThreadSpeed.finish();
+				translationThreadSpeed.finish();
 			translationThreadOne.finish();
 		}
 		if (be.isButtonTwoJustPressed() ) {
@@ -332,7 +371,7 @@ public class ControlerWiimoteListener implements WiimoteListener {
 		if (be.isButtonAJustPressed()) {
 			System.out.println("A pressed - translation mode");
 			accelerationActivated = true;
-			translationModeAndNotRotationMode = true;
+			RotationMode = true;
 		}
 		if (be.isButtonAJustReleased()) {
 			System.out.println("A released");
@@ -341,14 +380,12 @@ public class ControlerWiimoteListener implements WiimoteListener {
 		
 		if (be.isButtonBJustPressed()) {
 			System.out.println("B pressed");
-			//translationThread.finish();
-			//rotationThread.finish();
 			accelerationActivated = true;
-			translationModeAndNotRotationMode = false;
+			RotationMode = false;
 		}
 		if (be.isButtonBJustReleased()) {
 			//System.out.println("Home released");
-			//accelerationActivated = false;
+			accelerationActivated = false;
 		}
 		
 		if (be.isButtonMinusJustPressed())
@@ -427,7 +464,7 @@ public class ControlerWiimoteListener implements WiimoteListener {
 
 		protected Navigator navigator;
 		protected boolean finished = false;
-		protected Vector3d translation;
+		Vector3d translation;
 
 		public TranslationThread(Navigator navigator, Vector3d translation) {
 			this.translation = translation;
