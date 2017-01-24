@@ -34,6 +34,7 @@ public class ControlerWiimoteListener implements WiimoteListener {
 	protected boolean accelerationActivated = false;
 	protected boolean zModeAndNotYMode = true;
 	protected boolean RotationMode = true;
+	protected boolean LateralRotationMode = false;
 	protected boolean zModeAndNotYModeNunchuck = true;
 	protected boolean rotationModeNunchuck = false;
 	//public TranslationThread translationThread = new TranslationThread(navigator, new Vector3d(0, 0, 0));
@@ -111,7 +112,7 @@ public class ControlerWiimoteListener implements WiimoteListener {
 				if(!buttons.isButtonCHeld())
 					navigator.supportTranslateInHeadFrame(0, 0, -4*y* wiiInterface.getGainTranslation());
 				else{
-					navigator.supportTranslateInHeadFrame(0, 4*y* wiiInterface.getGainTranslation(), 0);
+					navigator.supportTranslateInHeadFrame(0, 0, -12*y* wiiInterface.getGainTranslation());
 				}
 			}
 			if(Math.abs(y)>sensibilite && x >50 && x<130){ //Joystick a droite
@@ -279,8 +280,8 @@ public class ControlerWiimoteListener implements WiimoteListener {
 				{ //2
 					Quat4d rotation = new Quat4d();
 					System.out.println(""+ac.getX()+"; "+ac.getY());
-					rotation.set(new AxisAngle4d(-ac.getY(),-ac.getX()+0.04, 0, 0.03));
-					
+					//rotation.set(new AxisAngle4d(-ac.getY(),-ac.getX()+0.04, 0, 0.03));
+					rotation.set(new AxisAngle4d(-ac.getY(),0, 0, 0.03));
 					navigator.supportRotateInHeadFrame(rotation.x, rotation.y,
 							rotation.z, rotation.w);
 					//navigator.supportTranslateInHeadFrame(0.0, 0.0, -ac.getY()* gainTranslation);
@@ -290,8 +291,19 @@ public class ControlerWiimoteListener implements WiimoteListener {
 					navigator.supportRotateInHeadFrame(rotation.x, rotation.y,rotation.z, rotation.w);
 					navigator.supportTranslateInHeadFrame(0.0, -ac.getY()* gainTranslation, 0.0);*/
 				}
+
 				
-			} /*else { //B
+			}
+			
+			}
+		if (LateralRotationMode){
+			Quat4d rotation = new Quat4d();
+			System.out.println(""+ac.getX()+"; "+ac.getY());
+			//rotation.set(new AxisAngle4d(-ac.getY(),-ac.getX()+0.04, 0, 0.03));
+			rotation.set(new AxisAngle4d(0,-ac.getX()+0.04, 0, 0.03));
+			navigator.supportRotateInHeadFrame(rotation.x, rotation.y,
+					rotation.z, rotation.w);
+			/*else { //B
 				if (zModeAndNotYMode) { //1
 					Quat4d rotation = new Quat4d();
 					rotation.set(new AxisAngle4d(1, 0, 0, -ac.getY()
@@ -380,12 +392,13 @@ public class ControlerWiimoteListener implements WiimoteListener {
 		
 		if (be.isButtonBJustPressed()) {
 			System.out.println("B pressed");
-			accelerationActivated = true;
-			RotationMode = false;
+			//accelerationActivated = true;
+			LateralRotationMode = !LateralRotationMode;
 		}
 		if (be.isButtonBJustReleased()) {
 			//System.out.println("Home released");
-			accelerationActivated = false;
+			LateralRotationMode = !LateralRotationMode;
+			//accelerationActivated = false;
 		}
 		
 		if (be.isButtonMinusJustPressed())
