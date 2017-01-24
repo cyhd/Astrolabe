@@ -1,8 +1,11 @@
 package fr.etma.navigator.timeRecorder;
 
+import java.io.File;
+
 import javax.media.j3d.TransformGroup;
 
 import fr.etma.navigator.shape.TargetShape;
+import fr.etma.navigator.sound.PlayerWav;
 
 public abstract class Detector {
 
@@ -24,14 +27,16 @@ public abstract class Detector {
 	public void begin(double distance) {
 		  // check step passed through is the right one
 	      if  ((supervisor.isCurrent(getId()))&&(! fired)) {
-	          fired = true ;
+	    	  fired = true ;
 	          doit(distance);
 	       }
 	      else {
 	    	  if  (fired)
-	    		  	  System.out.println( "Go to step " + supervisor.getCurrent() + " now, already passed through " + getId()  );
+	    		  	  {System.out.println( "Go to step " + supervisor.getCurrent() + " now, already passed through " + getId()  );
+	    	  			new PlayerWav("sounds"+File.separator+"no.wav", false).start();}
 	    	  else if (!supervisor.isCurrent(getId()))
-	    			  System.out.println( "Go to step " + supervisor.getCurrent() + " before step " + getId() + "!"  );
+	    			  {System.out.println( "Go to step " + supervisor.getCurrent() + " before step " + getId() + "!"  );
+	    	  			new PlayerWav("sounds"+File.separator+"no.wav", false).start();}
 	      }
 	    }
 
