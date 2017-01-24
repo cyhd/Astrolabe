@@ -1,6 +1,8 @@
 package fr.etma.navigator;
 
 import java.awt.GraphicsConfiguration;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
@@ -28,7 +30,7 @@ import com.sun.j3d.utils.universe.ViewingPlatform;
 import fr.etma.navigator.control.Navigator;
 import fr.etma.navigator.control.keyboard.NavigatorBehavior;
 import fr.etma.navigator.control.network.PilotageServerSocket;
-import fr.etma.navigator.control.wiimote.PilotageWiimoteBluetooth;
+import fr.etma.navigator.control.wiimote.PilotageWiimoteWiiuseJ;
 import fr.etma.navigator.shape.ShapeFactory;
 import fr.etma.navigator.shape.TargetShape;
 import fr.etma.navigator.shape.TubeShape;
@@ -39,69 +41,63 @@ import fr.etma.navigator.timeRecorder.StartTimeCountDetector;
 import fr.etma.navigator.timeRecorder.StopTimeCountDetector;
 import fr.etma.navigator.timeRecorder.Supervisor;
 
-public class DemoNavigation extends JFrame {
+public class DemoNavigation extends JFrame implements WindowListener {
 
 	/**
-    * 
-    */
+	* 
+	*/
 	private static final long serialVersionUID = -7195818365236790571L;
 	private VirtualUniverse universe = null;
 	private Canvas3D canvas3D = null;
 	private TransformGroup viewpointTG = new TransformGroup();
 	private Supervisor supervisor;
 	private TubeShape[] tubeShapes;
+	private PilotageWiimoteWiiuseJ pwb;
 
 	public BranchGroup createSceneGraph(Vector3d[] listePositions) {
 		// Create the root of the branch graph
 		BranchGroup objRoot = new BranchGroup();
 
 		Detector detector = new StartTimeCountDetector(supervisor);
-		TargetShape virtualBegin = new TargetShape( 0,
-				listePositions[0], listePositions[1], new Color3f(0.0f, 0.0f,
-						1.0f), new Color3f(1.0f, 0.0f, 0.0f), detector);
+		TargetShape virtualBegin = new TargetShape(0, listePositions[0], listePositions[1],
+				new Color3f(0.0f, 0.0f, 1.0f), new Color3f(1.0f, 0.0f, 0.0f), detector);
 		detector.add(virtualBegin);
 		virtualBegin.setAware();
 		objRoot.addChild(virtualBegin);
-		
-		Detector previousDetector = detector ;
+
+		Detector previousDetector = detector;
 		for (int i = 1; i < listePositions.length - 1; i++) {
 			detector = new IntermediateTimeCountDetector(supervisor);
-			TargetShape virtualObject = new TargetShape( i,
-					listePositions[i - 1], listePositions[i],
-					listePositions[i + 1], new Color3f(0.0f, 0.0f, 1.0f),
-					new Color3f(1.0f, 0.0f, 0.0f),
-					detector);
+			TargetShape virtualObject = new TargetShape(i, listePositions[i - 1], listePositions[i],
+					listePositions[i + 1], new Color3f(0.0f, 0.0f, 1.0f), new Color3f(1.0f, 0.0f, 0.0f), detector);
 			detector.add(virtualObject);
 			if (previousDetector != null) {
-				previousDetector.setNextTarget (virtualObject) ;
+				previousDetector.setNextTarget(virtualObject);
 			}
 			objRoot.addChild(virtualObject);
-			previousDetector = detector ;
+			previousDetector = detector;
 		}
-		
+
 		detector = new StopTimeCountDetector(supervisor);
-		TargetShape virtualEnd = new TargetShape( listePositions.length - 1,
-				listePositions[listePositions.length - 1],
-				listePositions[listePositions.length - 2], new Color3f(0.0f,
-						0.0f, 1.0f), new Color3f(1.0f, 0.0f, 0.0f),
+		TargetShape virtualEnd = new TargetShape(listePositions.length - 1, listePositions[listePositions.length - 1],
+				listePositions[listePositions.length - 2], new Color3f(0.0f, 0.0f, 1.0f), new Color3f(1.0f, 0.0f, 0.0f),
 				detector);
 		detector.add(virtualEnd);
 		objRoot.addChild(virtualEnd);
 		if (previousDetector != null) {
-			previousDetector.setNextTarget (virtualEnd) ;
+			previousDetector.setNextTarget(virtualEnd);
 		}
-		
-		tubeShapes = new TubeShape[listePositions.length-1];
+
+		tubeShapes = new TubeShape[listePositions.length - 1];
 		for (int i = 1; i < listePositions.length; i++) {
-			TubeShape virtualObject = new TubeShape(i,
-					listePositions[i - 1], listePositions[i], new Color3f(0.0f,
-							1.0f, 0.0f));
-			tubeShapes [i-1] = virtualObject;
+			TubeShape virtualObject = new TubeShape(i, listePositions[i - 1], listePositions[i],
+					new Color3f(0.0f, 1.0f, 0.0f));
+			tubeShapes[i - 1] = virtualObject;
 			objRoot.addChild(virtualObject);
 		}
 
-		//objRoot.addChild(ShapeFactory.loadFile("data/niveau1.wrl",
-		//		new Vector3d(-2, 0, 0)));
+		// objRoot.addChild(ShapeFactory.loadFile("data/niveau1.wrl",
+		// new Vector3d(-2, 0, 0)));
 		// objRoot.addChild (loadFile ("data/niveau2.wrl", new Vector3d (-2, 0,
 		// 0))) ;
 		// objRoot.addChild (loadFile ("data/niveau0_plane.wrl", new Vector3d
@@ -136,16 +132,13 @@ public class DemoNavigation extends JFrame {
 		return objRoot;
 	}
 
-	
 	public void enableInteraction(BranchGroup objRoot) {
 		BoundingSphere bounds = new BoundingSphere(new Point3d(0, 0, 0), 100);
-		PickRotateBehavior prb = new PickRotateBehavior(objRoot, canvas3D,
-				bounds);
+		PickRotateBehavior prb = new PickRotateBehavior(objRoot, canvas3D, bounds);
 		prb.setMode(PickTool.GEOMETRY);
 		prb.setTolerance(0.0f);
 		objRoot.addChild(prb);
-		PickTranslateBehavior ptb = new PickTranslateBehavior(objRoot,
-				canvas3D, bounds);
+		PickTranslateBehavior ptb = new PickTranslateBehavior(objRoot, canvas3D, bounds);
 		ptb.setMode(PickTool.GEOMETRY);
 		ptb.setTolerance(0.0f);
 		objRoot.addChild(ptb);
@@ -156,10 +149,12 @@ public class DemoNavigation extends JFrame {
 	}
 
 	public DemoNavigation() {
-		setSize(800, 600);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		GraphicsConfiguration config = SimpleUniverse
-				.getPreferredConfiguration();
+		this.setSize(800, 600);
+		this.setLocation(410, 0);
+		this.setTitle("Navigation 3D");
+		this.addWindowListener(this);
+
+		GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
 		canvas3D = new Canvas3D(config);
 		// c.setStereoEnable (true) ;
 		// System.out.println (c.getGraphicsContext3D ().getStereoMode ()) ;
@@ -204,8 +199,8 @@ public class DemoNavigation extends JFrame {
 		viewpointTG.addChild(nb);
 		viewpointTG.addChild(ShapeFactory.createSmallBox());
 
-		PointLight light = new PointLight(new Color3f(1.0f, 1.0f, 1.0f),
-				new Point3f(0.0f, 0.0f, 0.0f), new Point3f(1.0f, 0.0f, 0.0f));
+		PointLight light = new PointLight(new Color3f(1.0f, 1.0f, 1.0f), new Point3f(0.0f, 0.0f, 0.0f),
+				new Point3f(1.0f, 0.0f, 0.0f));
 		light.setColor(new Color3f(1.0f, 1.0f, 1.0f));
 		light.setBounds(new BoundingSphere(new Point3d(0, 0, 0), 1000));
 		light.setEnable(true);
@@ -214,18 +209,18 @@ public class DemoNavigation extends JFrame {
 		viewingPlatform.compile();
 
 		// position des etapes du parcours
-		Vector3d[] listePositions = { new Vector3d(0, 0, -4), new Vector3d(0, 0, -14), new Vector3d(0, 0, -24) } ;
-//				new Vector3d(0, 0, -10), new Vector3d(-20, -10, -40),
-//				new Vector3d(-10, 0, -40), new Vector3d(0, -10, -30),
-//				new Vector3d(10, 0, -20), new Vector3d(20, 0, -20),
-//				new Vector3d(30, 10, -10), new Vector3d(40, 10, 0) };
+		Vector3d[] listePositions = { new Vector3d(0, 0, -4), new Vector3d(0, 0, -14), new Vector3d(0, 0, -24) };
+		// new Vector3d(0, 0, -10), new Vector3d(-20, -10, -40),
+		// new Vector3d(-10, 0, -40), new Vector3d(0, -10, -30),
+		// new Vector3d(10, 0, -20), new Vector3d(20, 0, -20),
+		// new Vector3d(30, 10, -10), new Vector3d(40, 10, 0) };
 
 		// universe.getViewingPlatform ().setNominalViewingTransform () ;
 		Measurer measurer = new Measurer(navigator);
 		supervisor = new Supervisor(measurer, listePositions.length - 2);
 		BranchGroup scene = createSceneGraph(listePositions);
 		measurer.setTubeShapes(tubeShapes);
-		
+
 		// enableInteraction (scene) ;
 		// compilation de la scène
 		scene.compile();
@@ -234,10 +229,11 @@ public class DemoNavigation extends JFrame {
 		locale.addBranchGraph(scene);
 		PilotageServerSocket pss = new PilotageServerSocket(navigator);
 		pss.start();
-		PilotageWiimoteBluetooth pwb = new PilotageWiimoteBluetooth(navigator);
+
+		pwb = new PilotageWiimoteWiiuseJ(navigator);
 
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 	}
 
 	public void destroy() {
@@ -246,5 +242,52 @@ public class DemoNavigation extends JFrame {
 
 	public static void main(String[] args) {
 		new DemoNavigation();
+	}
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowClosed(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+
+		pwb.disconnect();
+
+		pwb.dispose();
+		this.dispose();
+		System.exit(444);
+
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+
 	}
 }
