@@ -1,5 +1,14 @@
 package fr.etma.navigator.control.keyboard;
 import java.awt.AWTEvent;
+import java.awt.AWTException;
+import java.awt.Dimension;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -43,6 +52,7 @@ public class NavigatorBehavior  extends Behavior {
       WakeupOnAWTEvent mouseDragged = new WakeupOnAWTEvent (MouseEvent.MOUSE_DRAGGED) ;
       WakeupOnAWTEvent mousePressed = new WakeupOnAWTEvent (MouseEvent.MOUSE_PRESSED) ;
       WakeupOnAWTEvent mouseReleased = new WakeupOnAWTEvent (MouseEvent.MOUSE_RELEASED) ;
+      //WakeupOnAWTEvent mouseMoved = new WakeupOnAWTEvent (MouseEvent.MOUSE_MOVED) ;
       WakeupCriterion [] conditions = { keyPressed, keyReleased, mouseWheeled, mouseDragged, mousePressed, mouseReleased } ;
       wEvents = new WakeupOr (conditions) ;
 
@@ -54,7 +64,36 @@ public class NavigatorBehavior  extends Behavior {
 public void initialize () {
       wakeupOn (wEvents) ;
    }
+   public void moveMouse(Point p) {
+	    GraphicsEnvironment ge = 
+	        GraphicsEnvironment.getLocalGraphicsEnvironment();
+	    GraphicsDevice[] gs = ge.getScreenDevices();
 
+	    // Search the devices for the one that draws the specified point.
+	    for (GraphicsDevice device: gs) { 
+	        GraphicsConfiguration[] configurations =
+	            device.getConfigurations();
+	        for (GraphicsConfiguration config: configurations) {
+	            Rectangle bounds = config.getBounds();
+	            if(bounds.contains(p)) {
+	                // Set point to screen coordinates.
+	                Point b = bounds.getLocation(); 
+	                Point s = new Point(p.x - b.x, p.y - b.y);
+
+	                try {
+	                    Robot r = new Robot(device);
+	                    r.mouseMove(s.x, s.y);
+	                } catch (AWTException e) {
+	                    e.printStackTrace();
+	                }
+
+	                return;
+	            }
+	        }
+	    }
+	    // Couldn't move to the point, it may be off screen.
+	    return;
+	}
    @Override
 @SuppressWarnings ("rawtypes")
    public void processStimulus (Enumeration criteria) { // examiner criteria �
@@ -66,32 +105,54 @@ public void initialize () {
                for (int i = 0 ; i < events.length ; i++) {
                   if (events [i].getID () == KeyEvent.KEY_PRESSED) {
                      int k  =  ((KeyEvent)events [i]).getKeyCode() ;
-                     if (k == KeyEvent.VK_UP) {
-                        deltaT.z = -0.1 ;
-                     } else if (k == KeyEvent.VK_DOWN) {
-                        deltaT.z = 0.1 ;
-                     } else if (k == KeyEvent.VK_PAGE_UP) {
+                     
+                   
+                     if (k == KeyEvent.VK_Z) {
+                    	 deltaR.set (new AxisAngle4d (new Vector3d (1, 0, 0), 0.02)) ;
+                      
+                     } else if (k == KeyEvent.VK_S) {
+                    	 deltaR.set (new AxisAngle4d (new Vector3d (1, 0, 0), -0.02)) ;
+                        
+                     }else if (k == KeyEvent.VK_DOWN) {
+                    	 deltaT.z = 0.1;
+                        
+                     }
+                     else if (k == KeyEvent.VK_UP) {
+                    	 deltaT.z = -0.1;
+                        
+                     }
+                     else if (k == KeyEvent.VK_PAGE_UP|| k == KeyEvent.VK_Z) {
+                    	 
                         deltaT.y = 0.1 ;
-                     } else if (k == KeyEvent.VK_PAGE_DOWN) {
+                     } else if (k == KeyEvent.VK_PAGE_DOWN|| k == KeyEvent.VK_S) {
                         deltaT.y = -0.1 ;
-                     } else if (k == KeyEvent.VK_LEFT) {
+                     } else if (k == KeyEvent.VK_LEFT|| k == KeyEvent.VK_Q) {
                         deltaR.set (new AxisAngle4d (new Vector3d (0, 1, 0), 0.02)) ;
-                     } else if (k == KeyEvent.VK_RIGHT) {
+                     } else if (k == KeyEvent.VK_RIGHT|| k == KeyEvent.VK_D) {
                         deltaR.set (new AxisAngle4d (new Vector3d (0, 1, 0), -0.02)) ;
                      }
                   } else if (events [i].getID () == KeyEvent.KEY_RELEASED) {
                      int k  =  ((KeyEvent)events [i]).getKeyCode() ;
-                     if (k == KeyEvent.VK_UP) {
-                        deltaT.z = 0 ;
-                     } else if (k == KeyEvent.VK_DOWN) {
-                        deltaT.z = 0 ;
-                     } else if (k == KeyEvent.VK_PAGE_UP) {
+                     if (k == KeyEvent.VK_Z) {
+                      
+                        deltaR.set (new AxisAngle4d (new Vector3d (1, 0, 0), 0)) ;
+                     } else if (k == KeyEvent.VK_S) {
+                       
+                        deltaR.set (new AxisAngle4d (new Vector3d (1, 0, 0), 0)) ;
+                     }else if (k == KeyEvent.VK_DOWN) {
+                         deltaT.z = 0 ;
+           
+                      } else if (k == KeyEvent.VK_UP) {
+                          deltaT.z = 0 ;
+                          
+                                     } 
+                     else if (k == KeyEvent.VK_PAGE_UP|| k == KeyEvent.VK_Z) {
                         deltaT.y = 0 ;
-                     } else if (k == KeyEvent.VK_PAGE_DOWN) {
+                     } else if (k == KeyEvent.VK_PAGE_DOWN|| k == KeyEvent.VK_S) {
                         deltaT.y = 0 ;
-                     } else if (k == KeyEvent.VK_LEFT) {
+                     } else if (k == KeyEvent.VK_LEFT|| k == KeyEvent.VK_Q) {
                         deltaR.set (new AxisAngle4d (new Vector3d (0, 1, 0), 0.0)) ;
-                     } else if (k == KeyEvent.VK_RIGHT) {
+                     } else if (k == KeyEvent.VK_RIGHT|| k == KeyEvent.VK_D) {
                         deltaR.set (new AxisAngle4d (new Vector3d (0, 1, 0), 0.0)) ;
                      }
                   } else if (events [i].getID () == MouseEvent.MOUSE_WHEEL) {
@@ -118,6 +179,7 @@ public void initialize () {
                      xInit = me.getX () ;
                      yInit = me.getY () ;
                   } else if (events [i].getID () == MouseEvent.MOUSE_DRAGGED) {
+                	 initHeadR = navigator.getHeadRotationInSupportFrame () ;
                      MouseEvent me  =  ((MouseEvent)events [i]) ;
                      int dx = me.getX () - xInit;
                      int dy = me.getY () - yInit ;
@@ -130,13 +192,34 @@ public void initialize () {
                      Quat4d relativeR = new Quat4d () ;
                      relativeR.mul (azimuthR, elevationR) ;
                      absoluteR.mul (initHeadR, relativeR);
-                     navigator.setHeadOrientationInSupportFrame (absoluteR.x, absoluteR.y, absoluteR.z, absoluteR.w);
+                     
                   }
+                 /* else if (events [i].getID () == MouseEvent.MOUSE_MOVED) {
+                	 
+                	 
+                      MouseEvent me  =  ((MouseEvent)events [i]) ;
+                      int dx = (me.getX () - xInit);
+                      int dy = me.getY () - yInit ;
+                      double azimuth = Math.atan2 (-dx, 500.0);
+                      double elevation = Math.atan2 (-dy, 500.0)*(-2) ;
+           
+                      Quat4d azimuthR = new Quat4d () ;
+                      azimuthR.set (new AxisAngle4d (0, 1, 0, azimuth)) ;
+                      Quat4d elevationR = new Quat4d () ;
+                      elevationR.set (new AxisAngle4d (1, 0, 0, elevation)) ;
+                      Quat4d relativeR = new Quat4d () ;
+                      relativeR.mul (azimuthR, elevationR) ;
+                      absoluteR.mul (initHeadR, relativeR);
+                      navigator.setHeadOrientationInSupportFrame (absoluteR.x, absoluteR.y, absoluteR.z, absoluteR.w);
+                      
+                  } */
                }
             }       
          }
          wakeupOn (wEvents) ;
       }
+      Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+      
    }
 
    class MoveThread extends Thread {
@@ -154,6 +237,7 @@ public void initialize () {
                synchronized (deltaR) {
                   navigator.supportRotateInHeadFrame (deltaR.x, deltaR.y, deltaR.z, deltaR.w) ;
                   navigator.supportTranslateInHeadFrame (deltaT.x, deltaT.y, deltaT.z) ; 
+                  
                }
             }
             try {
