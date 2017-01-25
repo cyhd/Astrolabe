@@ -55,13 +55,13 @@ public class TubeShape extends TransformGroup {
 		cylinder.getShape(Cylinder.TOP).removeAllGeometries();
 		Appearance app = new Appearance();
 		ColoringAttributes ca = new ColoringAttributes();
-		ca.setColor(color);
+		ca.setColor(new Color3f(0.8f, 0.8f, 0.8f));
 		ColoringAttributes ca2 = new ColoringAttributes();
-		ca2.setColor(new Color3f(1.0f, 0.0f, 0.0f));
+		ca2.setColor(new Color3f(1.0f, 0.50f, 0.0f));
 		app.setCapability(Appearance.ALLOW_COLORING_ATTRIBUTES_WRITE);
 		app.setColoringAttributes(ca);
 		TransparencyAttributes ta = new TransparencyAttributes();
-		ta.setTransparency(0.8f);
+		ta.setTransparency(0.80f);
 		ta.setTransparencyMode(TransparencyAttributes.FASTEST);
 		app.setTransparencyAttributes(ta);
 		PolygonAttributes pa = new PolygonAttributes();
