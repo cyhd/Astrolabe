@@ -212,12 +212,16 @@ public class DemoNavigation extends JFrame implements WindowListener {
 		viewingPlatform.compile();
 
 		// position des etapes du parcours
-		//*
+		
+		// De-commenter le parcours a utiliser (passer de /* a //* en premiere ligne)
+		// Et commenter les autres (passer de //* a /* en premiere ligne)
+		
+		//* Parcours de familiarisation - Ne pas enregistrer les temps /!\
 		Vector3d[] listePositions = { new Vector3d(0, 0, -5),
 				new Vector3d(0, 0, -15), new Vector3d(0, 2, -25),
 				new Vector3d(10, 2, -35), new Vector3d(0, 0, -50) };//*/
 				
-		/*
+		/* Parcours 1
 		Vector3d[] listePositions = { new Vector3d(0, 0, -5),
 				new Vector3d(0, 0, -15), new Vector3d(-9, 0, -25),
 				new Vector3d(-7, 3, -35), new Vector3d(-1, 2, -45),
@@ -225,7 +229,7 @@ public class DemoNavigation extends JFrame implements WindowListener {
 				new Vector3d(1, -5, -80), new Vector3d(10, -6, -100),
 				new Vector3d(12, -3, -105) };//*/
 		
-		/*
+		/* Parcours 2
 		Vector3d[] listePositions = { new Vector3d(0, 0, -5),
 				new Vector3d(0, 0, -15), new Vector3d(-2, -3, -20),
 				new Vector3d(-11, -2, -30), new Vector3d(-6, 1, -40),
@@ -233,7 +237,7 @@ public class DemoNavigation extends JFrame implements WindowListener {
 				new Vector3d(11, 7, -57), new Vector3d(18, 3, -53),
 				new Vector3d(24, 1, -45) };//*/
 		
-		/*
+		/* Parcours 3
 		Vector3d[] listePositions = { new Vector3d(0, 0, -5),
 				new Vector3d(0, 0, -15), new Vector3d(-4, 2, -25),
 				new Vector3d(-10, -2, -30), new Vector3d(-12, 0, -37),
