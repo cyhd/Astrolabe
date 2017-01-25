@@ -214,6 +214,11 @@ public class DemoNavigation extends JFrame implements WindowListener {
 		// position des etapes du parcours
 		//*
 		Vector3d[] listePositions = { new Vector3d(0, 0, -5),
+				new Vector3d(0, 0, -15), new Vector3d(0, 2, -25),
+				new Vector3d(10, 2, -35), new Vector3d(0, 0, -50) };//*/
+				
+		/*
+		Vector3d[] listePositions = { new Vector3d(0, 0, -5),
 				new Vector3d(0, 0, -15), new Vector3d(-9, 0, -25),
 				new Vector3d(-7, 3, -35), new Vector3d(-1, 2, -45),
 				new Vector3d(1, 0, -55), new Vector3d(6, -2, -65),
