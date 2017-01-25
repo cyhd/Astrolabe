@@ -298,7 +298,6 @@ public class ControlerWiimoteListener implements WiimoteListener {
 			}
 		if (LateralRotationMode){
 			Quat4d rotation = new Quat4d();
-			System.out.println(""+ac.getX()+"; "+ac.getY());
 			//rotation.set(new AxisAngle4d(-ac.getY(),-ac.getX()+0.04, 0, 0.03));
 			rotation.set(new AxisAngle4d(0,-ac.getX()+0.04, 0, 0.03));
 			navigator.supportRotateInHeadFrame(rotation.x, rotation.y,
