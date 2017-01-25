@@ -117,14 +117,14 @@ public class ControlerWiimoteListener implements WiimoteListener {
 			}
 			if(Math.abs(y)>sensibilite && x >50 && x<130){ //Joystick a droite
 				Quat4d rotation = new Quat4d();
-				rotation.set(new AxisAngle4d(0, 1, 0, -x/100
+				rotation.set(new AxisAngle4d(0, 1, 0, -x/50
 						* wiiInterface.getGainRotation()));
 				navigator.supportRotateInHeadFrame(rotation.x, rotation.y,
 						rotation.z, rotation.w);
 			}
 			if(Math.abs(y)>sensibilite && x <-50 && x>-130){ //Joystick a gauche
 				Quat4d rotation = new Quat4d();
-				rotation.set(new AxisAngle4d(0, 1, 0, -x/100
+				rotation.set(new AxisAngle4d(0, 1, 0, -x/50
 						* wiiInterface.getGainRotation()));
 				navigator.supportRotateInHeadFrame(rotation.x, rotation.y,
 						rotation.z, rotation.w);
