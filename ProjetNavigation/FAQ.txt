@@ -1,0 +1,23 @@
+FAQ Astrolabe
+
+- What if it builds but does not run ?
+
+Java 3D needs a dynamic library (.so with Linux, .dll with Windows). Under windows, you will get them in the path by installing Java 3D. 
+With Linux, you will have to have to add an argument to the Java VM when running the application: -Djava.library.path=/.../ProjetNavigation/lib/ where the libj3dcore-ogl.so file is.
+
+- How do I change the keyboard or mouse configuration ?
+
+You have to modify the NavigatorBehavior class (it inherits from the Java3D class Behavior that manages inputs).
+
+- How can I update the logging information ?
+
+The logger class is doing the logging, called by Measurer, the class whose calculating camera positions, distance, etc.
+
+- Where is the camera ?
+
+The camera (the viewpoint) is managed in the Navigator class.
+
+- How to change the 3D path to follow ?
+
+The 3D maze is generated from the fr.etma.navigator.DemoNavigation class. Find the 'listePositions' table, it contains a list of points the 3D path is following - just change the point coordinates. Alternatively, the 'Trajectoires' directory contains more path definintions you can copy/paste.
+

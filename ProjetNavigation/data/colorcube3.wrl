@@ -1,0 +1,58 @@
+#VRML V2.0 utf8
+#
+
+Transform {
+
+children [
+# Un cube
+DEF ColorCube Shape {
+   # No appearance, use emissive coloring
+                        appearance Appearance {
+                                material Material {
+                                        diffuseColor 1 0 0
+                                        specularColor 1 1 1
+                                        emissiveColor 0.1 0 0
+                                }
+                        }
+   
+   geometry Box { size 2 2 2 }
+}
+
+Transform {
+translation 3 0 0
+children [
+DEF ColorCube Shape {
+   # No appearance, use emissive coloring
+                        appearance Appearance {
+                                material Material {
+                                        diffuseColor 0 1 0
+                                        emissiveColor 0 0.1 0
+                                        specularColor 1 1 1
+                                }
+                        }
+   
+   geometry Box { size 2 2 2 }
+}
+]
+}
+
+Transform {
+translation -3 0 0
+children [
+DEF ColorCube Shape {
+   # No appearance, use emissive coloring
+                        appearance Appearance {
+                                material Material {
+                                        diffuseColor 0 0 1
+                                        emissiveColor 0 0 0.1
+                                        specularColor 1 1 1
+                                }
+                        }
+   
+   geometry Box { size 2 2 2 }
+}
+]
+}
+
+]
+}
