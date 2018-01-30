@@ -38,7 +38,7 @@ public class TargetShape extends TransformGroup {
 		translation.setRotation(getRotation1(v3d, nextV3d));
 
 		translation.setTranslation(v3d);
-		translation.setScale(new Vector3d(1.3, 0.1, 1.3));
+		translation.setScale(new Vector3d(1, 0.05, 1));
 
 		this.setTransform(translation);
 
@@ -134,7 +134,7 @@ public class TargetShape extends TransformGroup {
 		this.addChild(cd);
 	}
 
-	public void select() {
+	public void select () {
 	    ColoringAttributes highlight = new ColoringAttributes (collisionColor, ColoringAttributes.SHADE_GOURAUD);
 	    //ColoringAttributes highlight = new ColoringAttributes (new Color3f(0,1,0), ColoringAttributes.SHADE_GOURAUD) ;
 		//ColoringAttributes shapeColoring = shapeAppearance.getColoringAttributes () ;
@@ -142,14 +142,12 @@ public class TargetShape extends TransformGroup {
 		
 	}
 
-	public int getId() {
+	public int getId () {
 		return id;
 	}
 
-	public void setAware() {
-		// TODO Auto-generated method stub
+	public void setAware () {
 	    ColoringAttributes highlight = new ColoringAttributes (awareColor, ColoringAttributes.SHADE_GOURAUD);
 		shapeAppearance.setColoringAttributes (highlight) ;
-		
 	}
 }

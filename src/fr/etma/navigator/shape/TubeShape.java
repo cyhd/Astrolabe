@@ -23,8 +23,8 @@ public class TubeShape extends TransformGroup {
 	public TubeShape(int id, Vector3d from, Vector3d to, Color3f color) {
 
 		this.id = id;
-		this.x1 = from;
-		this.x2 = to;
+		x1 = from;
+		x2 = to;
 		
 		Transform3D translation = new Transform3D();
 		Vector3d middle = new Vector3d(from);
@@ -43,9 +43,9 @@ public class TubeShape extends TransformGroup {
 		translation.setTranslation(middle);
 		// translation.setScale (new Vector3d (1, length.length (), 1)) ;
 
-		this.setTransform(translation);
-		this.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-		this.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+		setTransform(translation);
+		setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+		setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
 
 		// objTrans.setCapability (TransformGroup.ENABLE_PICK_REPORTING) ;
 		Cylinder cylinder = new Cylinder(diameter, (float) length.length());
@@ -68,15 +68,15 @@ public class TubeShape extends TransformGroup {
 		pa.setCullFace(PolygonAttributes.CULL_NONE);
 		app.setPolygonAttributes(pa);
 		cylinder.setAppearance(app);
-		this.addChild(cylinder);
+		addChild(cylinder);
 		Appearance app2 = new Appearance();
 		app2.setColoringAttributes(ca2);
 		app2.setTransparencyAttributes(ta);
 		app2.setPolygonAttributes(pa);
 		Box box = new Box(0.025f, (float) length.length() / 2.0f - 0.6f,
 				0.025f, app2);
-		this.addChild(box);
-
+		addChild(box);
+		
 	}
 
 	public double distanceToPoint(Vector3d x0) {

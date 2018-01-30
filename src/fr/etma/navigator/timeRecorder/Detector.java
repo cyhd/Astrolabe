@@ -37,17 +37,16 @@ public abstract class Detector {
 
 	public abstract void end();
 
-	// devrait être renommé en setTarget
-	public void add(TargetShape s) {
-		target = s;
+	public void setTarget (TargetShape s) {
+		target = s ;
 	}
 	
-	public void setNextTarget(TargetShape s) {
-		nextTarget = s;
+	public void setNextTarget (TargetShape s) {
+		nextTarget = s ;
 	}
 	
-	public int getId() {
-		return target.getId();
+	public int getId () {
+		return target.getId () ;
 	}
 
 }

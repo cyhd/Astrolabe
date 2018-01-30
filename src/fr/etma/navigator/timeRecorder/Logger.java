@@ -10,7 +10,7 @@ public class Logger {
 	protected static FileWriter outFileXML = null;
 	private static Logger instance = null;
 	
-	public static Logger getInstance() {
+	public static Logger getInstance () {
 		if (instance == null) {
 			instance = new Logger();
 		}
